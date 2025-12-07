@@ -1,0 +1,18 @@
+﻿<UserControl x:Name="UserControlGame" x:Class="SAE_1._01.UCGame"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SAE_1._01"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1280" Loaded="UserControl_Loaded">
+    <Grid>
+        <Canvas x:Name="GameCanvas" Width="1280" Height="720">
+            <Canvas.LayoutTransform>
+                <ScaleTransform x:Name="GameScale"/>
+            </Canvas.LayoutTransform>
+
+            <Rectangle x:Name="Player" Width="50" Height="50" Fill="Red" Canvas.Left="0" Canvas.Top="0"/>
+        </Canvas>
+    </Grid>
+</UserControl>
