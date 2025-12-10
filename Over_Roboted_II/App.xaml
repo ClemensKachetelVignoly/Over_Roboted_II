@@ -1,7 +1,7 @@
-﻿<Application x:Class="SAE_1._01.App"
+﻿<Application x:Class="Over_Roboted_II.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:SAE_1._01"
+             xmlns:local="clr-namespace:Over_Roboted_II"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
