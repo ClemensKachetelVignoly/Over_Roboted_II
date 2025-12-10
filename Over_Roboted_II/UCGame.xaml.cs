@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -13,13 +15,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SAE_1._01
+namespace Over_Roboted_II
 {
     /// <summary>
     /// Logique d'interaction pour UCGame.xaml
     /// </summary>
     public partial class UCGame : UserControl
     {
+        List<CraftingTable> CraftingTables = new List<CraftingTable>();
+
         public Stopwatch stopwatch = new Stopwatch();
 
         private static double lastFrameTime;
@@ -40,10 +44,24 @@ namespace SAE_1._01
         public UCGame()
         {
             InitializeComponent();
+            InitializeCraftingTable();
             stopwatch.Start();
             SizeChanged += OnWindowSizeChanged;
 
             CompositionTarget.Rendering += GameLoop;
+        }
+
+        private void InitializeCraftingTable()
+        {
+            CraftingTables.Add(new CraftingTable(200, 0));
+            CraftingTables.Add(new CraftingTable(300, 100));
+            CraftingTables.Add(new CraftingTable(500, 500));
+
+            foreach (var c in CraftingTables)
+            {
+                c.Draw(GameCanvas);
+            }
+
         }
 
         private void GameLoop(object sender, EventArgs e)
@@ -109,10 +127,43 @@ namespace SAE_1._01
                 velY = velocity.Y;
             }
 
-            // Position
+            // Collision X
 
-            posX += velX * deltaTime;
-            posY += velY * deltaTime;
+            double newX = posX + velX * deltaTime;
+            Rect futureX = new Rect(newX, posY, Player.Width, Player.Height);
+            bool collideX = false;
+
+            foreach (var c in CraftingTables)
+            {
+                if (futureX.IntersectsWith(c.Hitbox))
+                {
+                    collideX = true;
+                    break;
+                }
+            }
+
+            if (!collideX) posX = newX;
+            else velX = 0;
+
+            // Collision Y
+
+            double newY = posY + velY * deltaTime;
+            Rect futureY = new Rect(posX, newY, Player.Width, Player.Height);
+            bool collideY = false;
+
+            foreach (var c in CraftingTables)
+            {
+                if (futureY.IntersectsWith(c.Hitbox))
+                {
+                    collideY = true;
+                    break;
+                }
+            }
+
+            if (!collideY) posY = newY;
+            else velY = 0;
+
+            // Position
 
             Canvas.SetLeft(Player, posX);
             Canvas.SetTop(Player, posY);

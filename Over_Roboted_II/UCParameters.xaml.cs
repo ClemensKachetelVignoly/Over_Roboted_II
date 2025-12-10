@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SAE_1._01
+namespace Over_Roboted_II
 {
     /// <summary>
     /// Logique d'interaction pour UCParameters.xaml
