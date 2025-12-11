@@ -194,6 +194,7 @@ namespace Over_Roboted_II
             if (e.Key == Key.D) inputX = 1;
             if (e.Key == Key.Z) inputY = -1;
             if (e.Key == Key.S) inputY = 1;
+            if (e.Key == Key.Space) MainWindow.mainWindow.Close();
         }
 
         private void GameKeyUp(object sender, KeyEventArgs e)

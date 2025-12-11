@@ -32,7 +32,7 @@ namespace Over_Roboted_II
             /// </summary>
 
             
-            ((MainWindow)(Application.Current.MainWindow)).ShowUC("_game");
+            MainWindow.mainWindow.ShowUC("_game");
         }
     }
 }
