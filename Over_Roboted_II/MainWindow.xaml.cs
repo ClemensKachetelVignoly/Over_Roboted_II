@@ -23,6 +23,8 @@ namespace Over_Roboted_II
 
         //public Window mainWindow { get; } = (MainWindow)(Application.Current.MainWindow);
 
+        public static MainWindow mainWindow = ((MainWindow)(Application.Current.MainWindow));
+
         public MainWindow()
         {
             InitializeComponent();

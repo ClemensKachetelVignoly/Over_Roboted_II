@@ -39,7 +39,7 @@ namespace Over_Roboted_II
 
             UpdateValues(parametersDict, tempDict);
             UpdateSettings(parametersDict, 0);
-            ((MainWindow)(Application.Current.MainWindow)).ShowUC("_game");
+            MainWindow.mainWindow.ShowUC("_game");
         }
 
         private void butApply_Click(object sender, RoutedEventArgs e)
@@ -50,7 +50,7 @@ namespace Over_Roboted_II
 
             UpdateValues(tempDict, parametersDict);
             UpdateSettings(parametersDict, 1);
-            ((MainWindow)(Application.Current.MainWindow)).ShowUC("_game");
+            MainWindow.mainWindow.ShowUC("_game");
         }
 
         private void CheckFullscreen_Click(object sender, RoutedEventArgs e)
