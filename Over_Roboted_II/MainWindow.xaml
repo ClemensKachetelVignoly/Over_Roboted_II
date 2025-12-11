@@ -7,4 +7,5 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <ContentControl x:Name="contentControl"/>
+    
 </Window>

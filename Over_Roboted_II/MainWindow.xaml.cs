@@ -19,17 +19,24 @@ namespace Over_Roboted_II
     {
         public UCGame _game = new UCGame();
         public UCParameters _parameters = new UCParameters();
+        public UCDemarrage _demarrage = new UCDemarrage();
+
+        //public Window mainWindow { get; } = (MainWindow)(Application.Current.MainWindow);
 
         public MainWindow()
         {
             InitializeComponent();
-
-            ShowUC("_game");
+            ShowUC("_demarrage");
+            
         }
-
+       
         public void ShowUC(string uc)
-        {                       
-            if (uc == "_game")
+        {                    
+            if (uc == "_demarrage")
+            {
+                contentControl.Content = _demarrage;
+            }
+            else if (uc == "_game")
             { 
                 _game.stopwatch.Start();
                 contentControl.Content = _game;
