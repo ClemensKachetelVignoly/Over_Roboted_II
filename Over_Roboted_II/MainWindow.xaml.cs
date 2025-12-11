@@ -20,6 +20,8 @@ namespace Over_Roboted_II
         public UCGame _game = new UCGame();
         public UCParameters _parameters = new UCParameters();
 
+        public static MainWindow mainWindow = ((MainWindow)(Application.Current.MainWindow));
+
         public MainWindow()
         {
             InitializeComponent();

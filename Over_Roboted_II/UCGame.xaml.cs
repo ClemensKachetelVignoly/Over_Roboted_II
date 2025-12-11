@@ -45,17 +45,18 @@ namespace Over_Roboted_II
         {
             InitializeComponent();
             InitializeCraftingTable();
-            stopwatch.Start();
+
             SizeChanged += OnWindowSizeChanged;
 
+            stopwatch.Start();
             CompositionTarget.Rendering += GameLoop;
         }
 
         private void InitializeCraftingTable()
         {
             CraftingTables.Add(new CraftingTable(200, 0));
-            CraftingTables.Add(new CraftingTable(300, 100));
-            CraftingTables.Add(new CraftingTable(500, 500));
+            CraftingTables.Add(new CraftingTable(360, 0));
+            CraftingTables.Add(new CraftingTable(520, 0));
 
             foreach (var c in CraftingTables)
             {
@@ -167,6 +168,13 @@ namespace Over_Roboted_II
 
             Canvas.SetLeft(Player, posX);
             Canvas.SetTop(Player, posY);
+
+            Rect playerHitbox = new Rect(posX+Player.Width/2, posY, 0, Player.Height);
+            
+            foreach (var c in CraftingTables)
+            {
+                c.Interact(playerHitbox);
+            }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -179,7 +187,7 @@ namespace Over_Roboted_II
         {
             if (e.Key == Key.Escape)
             {
-                ((MainWindow)(Application.Current.MainWindow)).ShowUC("_parameters");
+                MainWindow.mainWindow.ShowUC("_parameters");
                 stopwatch.Stop();
             }
             if (e.Key == Key.Q) inputX = -1;
@@ -196,6 +204,7 @@ namespace Over_Roboted_II
             if ((e.Key == Key.Z) && inputY == -1) inputY = 0;
             if ((e.Key == Key.S) && inputY == 1) inputY = 0;
         }
+
         private void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
             /// <summary>

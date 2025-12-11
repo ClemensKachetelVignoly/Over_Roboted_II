@@ -19,15 +19,27 @@ namespace Over_Roboted_II
 
         public Rectangle myRect = new Rectangle();
 
+        public bool canInteract = false;
+        public bool isInteracting = false;
+
         public CraftingTable(int x, int y)
         {
             X = x;
             Y = y;
         }
 
-        public void Interact()
+        public void Interact(Rect playerHitbox)
         {
-            
+            if (playerHitbox.IntersectsWith(this.InteractHitbox))
+            {
+                myRect.Fill = Brushes.Black;
+                canInteract = true;
+            }
+            else
+            {
+                myRect.Fill = Brushes.BlueViolet;
+                canInteract = false;
+            }
         }
 
         public void Draw(Canvas canvas)
@@ -39,6 +51,8 @@ namespace Over_Roboted_II
             Canvas.SetLeft(myRect, X);
             Canvas.SetTop(myRect, Y);
         }
+
         public Rect Hitbox => new Rect(X, Y, 160, 80);
+        public Rect InteractHitbox => new Rect(X, Y+50, 160, 40);
     }
 }
