@@ -28,8 +28,7 @@ namespace Over_Roboted_II
         public MainWindow()
         {
             InitializeComponent();
-            ShowUC("_demarrage");
-            
+            ShowUC("_demarrage"); 
         }
        
         public void ShowUC(string uc)

@@ -56,7 +56,7 @@ namespace Over_Roboted_II
 
         private void InitializeCraftingTable()
         {
-            CraftingTables.Add(new CraftingTable(200, 0));
+            CraftingTables.Add(new CraftingTable(200, 500));
             CraftingTables.Add(new CraftingTable(360, 0));
             CraftingTables.Add(new CraftingTable(520, 0));
 
@@ -175,7 +175,8 @@ namespace Over_Roboted_II
             
             foreach (var c in CraftingTables)
             {
-                c.Interact(new Rect(posX + Player.Width / 2, posY, 0, Player.Height));
+                //c.Interact(new Rect(posX + Player.Width / 2, posY, 0, Player.Height));
+                c.Interact(playerHitbox);
             }
         }
 

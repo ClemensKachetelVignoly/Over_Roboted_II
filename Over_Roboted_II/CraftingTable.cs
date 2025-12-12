@@ -77,7 +77,7 @@ namespace Over_Roboted_II
 
                 for (int i = 0;  i < AllCraftingTables.Count; i++)
                 {
-                    if (i == AllCraftingTables.IndexOf(this)) Console.WriteLine(this.Hitbox);
+                    if (i == AllCraftingTables.IndexOf(this)) continue;
                     else
                     {
                         if (this.Hitbox.IntersectsWith(AllCraftingTables[i].Hitbox) || this.Hitbox.IntersectsWith(UCGame.playerHitbox))
@@ -106,7 +106,6 @@ namespace Over_Roboted_II
 
                 myRect.Fill = Brushes.BlueViolet;
                 oldHitbox = new Rect();
-                
             }
         }
 
@@ -114,13 +113,23 @@ namespace Over_Roboted_II
         {
             if (playerHitbox.IntersectsWith(this.InteractHitbox) && myRect.Fill != Brushes.Red)
             {
-                myRect.Fill = Brushes.Black;
-                canInteract = true;
+                foreach (var c in AllCraftingTables)
+                {
+                    if (c.myRect.Fill == Brushes.Black)
+                    {
+                        c.myRect.Fill = Brushes.BlueViolet;
+                    }
+                    myRect.Fill = Brushes.Black;
+                    canInteract = true;
+                }
             }
             else
             {
-                if (myRect.Fill != Brushes.Red) myRect.Fill = Brushes.BlueViolet;
-                canInteract = false;
+                if (myRect.Fill != Brushes.Red)
+                {
+                    myRect.Fill = Brushes.BlueViolet;
+                    canInteract = false;
+                }
             }
         }
 
@@ -135,6 +144,6 @@ namespace Over_Roboted_II
         }
 
         public Rect Hitbox => new Rect(X, Y, 160, 80);
-        public Rect InteractHitbox => new Rect(X, Y+50, 160, 40);
+        public Rect InteractHitbox => new Rect(X-10, Y-10, 180, 100);
     }
 }
