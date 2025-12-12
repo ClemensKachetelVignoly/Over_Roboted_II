@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.Serialization;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -16,9 +17,9 @@ namespace Over_Roboted_II
 {
     internal class CraftingTable
     {
-        public static List<CraftingTable> AllCraftingTables = new List<CraftingTable>();
+        private static List<CraftingTable> AllCraftingTables = new List<CraftingTable>();
 
-        public int X { get; set; }
+        public int X { get; set; } 
         public int Y { get; set; }
 
         public Rectangle myRect = new Rectangle();
@@ -29,6 +30,8 @@ namespace Over_Roboted_II
         private bool isDragging = false;
         private Point dragStartMouse;
         private Point dragStartBlock;
+
+        public static Rect oldHitbox = new Rect();
 
         public CraftingTable(int x, int y)
         {
@@ -46,11 +49,13 @@ namespace Over_Roboted_II
         {
             isDragging = true;
             myRect.CaptureMouse();
-
+            
             dragStartMouse = e.GetPosition(myRect.Parent as UIElement);
             dragStartBlock = new Point(X, Y);
 
             e.Handled = true;
+
+            oldHitbox = this.Hitbox;
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
@@ -68,35 +73,53 @@ namespace Over_Roboted_II
                 Canvas.SetLeft(myRect, X);
                 Canvas.SetTop(myRect, Y);
 
-                foreach (var item in AllCraftingTables)
-                {
-                    if (item == this) continue;
+                bool changeColor = false;
 
-                    if (Hitbox.IntersectsWith(item.Hitbox))
+                for (int i = 0;  i < AllCraftingTables.Count; i++)
+                {
+                    if (i == AllCraftingTables.IndexOf(this)) Console.WriteLine(this.Hitbox);
+                    else
                     {
-                        Console.WriteLine("zr");
-                        myRect.Fill = Brushes.Red;
+                        if (this.Hitbox.IntersectsWith(AllCraftingTables[i].Hitbox) || this.Hitbox.IntersectsWith(UCGame.playerHitbox))
+                        {
+                            changeColor = true;
+                        }
                     }
-                    else myRect.Fill = Brushes.BlueViolet;
                 }
+
+                if (changeColor) myRect.Fill = Brushes.Red;
+                else myRect.Fill = Brushes.BlueViolet;
+                changeColor = false;
             }
         }
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
         {
             isDragging = false;
             myRect.ReleaseMouseCapture();
+            
+            if (myRect.Fill == Brushes.Red)
+            {
+                Canvas.SetLeft(myRect, oldHitbox.X);
+                Canvas.SetTop(myRect, oldHitbox.Y);
+                this.X = (int)oldHitbox.X;
+                this.Y = (int)oldHitbox.Y;
+
+                myRect.Fill = Brushes.BlueViolet;
+                oldHitbox = new Rect();
+                
+            }
         }
 
         public void Interact(Rect playerHitbox)
         {
-            if (playerHitbox.IntersectsWith(this.InteractHitbox))
+            if (playerHitbox.IntersectsWith(this.InteractHitbox) && myRect.Fill != Brushes.Red)
             {
                 myRect.Fill = Brushes.Black;
                 canInteract = true;
             }
             else
             {
-                //myRect.Fill = Brushes.BlueViolet;
+                if (myRect.Fill != Brushes.Red) myRect.Fill = Brushes.BlueViolet;
                 canInteract = false;
             }
         }

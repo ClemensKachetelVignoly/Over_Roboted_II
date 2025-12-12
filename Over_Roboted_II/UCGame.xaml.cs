@@ -28,6 +28,8 @@ namespace Over_Roboted_II
 
         private static double lastFrameTime;
 
+        public static Rect playerHitbox;
+
         double posX = 0;
         double posY = 0;
 
@@ -169,11 +171,11 @@ namespace Over_Roboted_II
             Canvas.SetLeft(Player, posX);
             Canvas.SetTop(Player, posY);
 
-            Rect playerHitbox = new Rect(posX+Player.Width/2, posY, 0, Player.Height);
+            playerHitbox = new Rect(posX, posY, Player.Width, Player.Height);
             
             foreach (var c in CraftingTables)
             {
-                c.Interact(playerHitbox);
+                c.Interact(new Rect(posX + Player.Width / 2, posY, 0, Player.Height));
             }
         }
 
