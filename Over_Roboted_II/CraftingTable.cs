@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Reflection.Emit;
 using System.Runtime.Serialization;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -11,6 +12,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
 namespace Over_Roboted_II
@@ -22,7 +25,10 @@ namespace Over_Roboted_II
         public int X { get; set; } 
         public int Y { get; set; }
 
-        public Rectangle myRect = new Rectangle();
+        public Image imgCT;
+        public BitmapImage source;
+        public BitmapImage sourceOK;
+        public BitmapImage sourceError;
 
         public bool canInteract = false;
         public bool isInteracting = false;
@@ -38,9 +44,17 @@ namespace Over_Roboted_II
             X = x;
             Y = y;
 
-            myRect.MouseLeftButtonDown += OnMouseDown;
-            myRect.MouseLeftButtonUp += OnMouseUp;
-            myRect.MouseMove += OnMouseMove;
+            source = new BitmapImage(new Uri("pack://application:,,,/Images/CraftingTable.jpg"));
+            sourceOK = new BitmapImage(new Uri("pack://application:,,,/Images/CraftingTableOK.jpg"));
+            sourceError = new BitmapImage(new Uri("pack://application:,,,/Images/CraftingTableError.jpg"));
+
+            imgCT = new Image {
+                Source = source
+            };
+
+            imgCT.MouseLeftButtonDown += OnMouseDown;
+            imgCT.MouseLeftButtonUp += OnMouseUp;
+            imgCT.MouseMove += OnMouseMove;
 
             AllCraftingTables.Add(this);
         }
@@ -48,21 +62,26 @@ namespace Over_Roboted_II
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             isDragging = true;
-            myRect.CaptureMouse();
+
+            imgCT.CaptureMouse();
             
-            dragStartMouse = e.GetPosition(myRect.Parent as UIElement);
+            dragStartMouse = e.GetPosition(imgCT.Parent as UIElement);
             dragStartBlock = new Point(X, Y);
 
             e.Handled = true;
 
             oldHitbox = this.Hitbox;
+
+            imgCT.Opacity = 0.6;
+
+            Canvas.SetZIndex(imgCT, 1);
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
             if (isDragging)
             {
-                Point mousePos = e.GetPosition(myRect.Parent as UIElement);
+                Point mousePos = e.GetPosition(imgCT.Parent as UIElement);
 
                 double dx = mousePos.X - dragStartMouse.X;
                 double dy = mousePos.Y - dragStartMouse.Y;
@@ -70,8 +89,8 @@ namespace Over_Roboted_II
                 X = (int)(dragStartBlock.X + dx);
                 Y = (int)(dragStartBlock.Y + dy);
 
-                Canvas.SetLeft(myRect, X);
-                Canvas.SetTop(myRect, Y);
+                Canvas.SetLeft(imgCT, X);
+                Canvas.SetTop(imgCT, Y);
 
                 bool changeColor = false;
 
@@ -87,47 +106,50 @@ namespace Over_Roboted_II
                     }
                 }
 
-                if (changeColor) myRect.Fill = Brushes.Red;
-                else myRect.Fill = Brushes.BlueViolet;
-                changeColor = false;
+                if (changeColor) imgCT.Source = sourceError;
+                else imgCT.Source = sourceOK;
             }
         }
+
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
         {
             isDragging = false;
-            myRect.ReleaseMouseCapture();
-            
-            if (myRect.Fill == Brushes.Red)
+            imgCT.ReleaseMouseCapture();
+
+            if (imgCT.Source == sourceError)
             {
-                Canvas.SetLeft(myRect, oldHitbox.X);
-                Canvas.SetTop(myRect, oldHitbox.Y);
+                Canvas.SetLeft(imgCT, oldHitbox.X);
+                Canvas.SetTop(imgCT, oldHitbox.Y);
                 this.X = (int)oldHitbox.X;
                 this.Y = (int)oldHitbox.Y;
 
-                myRect.Fill = Brushes.BlueViolet;
                 oldHitbox = new Rect();
             }
+
+            imgCT.Source = source;
+            imgCT.Opacity = 1;
+            Canvas.SetZIndex(imgCT, 0);
         }
 
         public void Interact(Rect playerHitbox)
         {
-            if (playerHitbox.IntersectsWith(this.InteractHitbox) && myRect.Fill != Brushes.Red)
+            if (playerHitbox.IntersectsWith(this.InteractHitbox) && imgCT.Source != sourceError)
             {
                 foreach (var c in AllCraftingTables)
                 {
-                    if (c.myRect.Fill == Brushes.Black)
+                    if (c.imgCT.Opacity == 0.7)
                     {
-                        c.myRect.Fill = Brushes.BlueViolet;
+                        c.imgCT.Opacity = 1;
                     }
-                    myRect.Fill = Brushes.Black;
+                    imgCT.Opacity = 0.7;
                     canInteract = true;
                 }
             }
             else
             {
-                if (myRect.Fill != Brushes.Red)
+                if (imgCT.Source != sourceError)
                 {
-                    myRect.Fill = Brushes.BlueViolet;
+                    imgCT.Opacity = isDragging ? 0.6 : 1;
                     canInteract = false;
                 }
             }
@@ -135,12 +157,11 @@ namespace Over_Roboted_II
 
         public void Draw(Canvas canvas)
         {
-            myRect.Fill = Brushes.BlueViolet;
-            myRect.Height = 80;
-            myRect.Width = 160;
-            canvas.Children.Add(myRect);
-            Canvas.SetLeft(myRect, X);
-            Canvas.SetTop(myRect, Y);
+            imgCT.Height = 80;
+            imgCT.Width = 160;
+            canvas.Children.Add(imgCT);
+            Canvas.SetLeft(imgCT, X);
+            Canvas.SetTop(imgCT, Y);
         }
 
         public Rect Hitbox => new Rect(X, Y, 160, 80);

@@ -11,10 +11,16 @@
 
   <ItemGroup>
     <None Remove="Images\backgroundAccueil.jpg" />
+    <None Remove="Images\CraftingTable.jpg" />
+    <None Remove="Images\CraftingTableError.jpg" />
+    <None Remove="Images\CraftingTableOK.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Images\backgroundAccueil.jpg" />
+    <Resource Include="Images\CraftingTable.jpg" />
+    <Resource Include="Images\CraftingTableError.jpg" />
+    <Resource Include="Images\CraftingTableOK.jpg" />
   </ItemGroup>
 
 </Project>
