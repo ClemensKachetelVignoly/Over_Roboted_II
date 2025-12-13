@@ -34,5 +34,22 @@ namespace Over_Roboted_II
             
             MainWindow.mainWindow.ShowUC("_game");
         }
+
+        private void butRegles_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.mainWindow.ShowUC("_regles");
+        }
+
+        private void butParametres_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.mainWindow.ShowUC("_parameters");
+        }
+
+        private void butQuitterJeu_Click(object sender, RoutedEventArgs e)
+        {
+            
+            Application.Current.Shutdown();
+
+        }
     }
 }

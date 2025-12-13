@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1280">
     <Canvas>
-        <TextBlock TextWrapping="Wrap" Background="White" Canvas.Left="524" Canvas.Top="220" Height="222" Width="376"><Run Language="fr-fr" Text="Dans un future où les robots dominent le monde, les humains doivent leur obéir ou périr dans d'atroces souffrances. Vous incarnerez donc Miku, une jeune humaine qui a été placé dans une usine pour construire "/></TextBlock>
+        <TextBlock TextWrapping="Wrap" Background="White" Canvas.Left="524" Canvas.Top="220" Height="222" Width="376"><Run Text="Dans un future où les robots dominent le monde, les humains doivent leur obéir ou périr dans d'atroces souffrances. Vous incarnerez donc Miku, une jeune humaine qui a été placé dans une usine pour construire des robots jusqu'à sa mort."/><LineBreak/><Run/><LineBreak/><Run Language="fr-fr" Text="Pour ce faire, vous recevrez des commandes de robots que vous devrez livrer en construisant les robots morceaux par morceaux. "/></TextBlock>
+        <Button x:Name="butQuitter" Content="Quitter" Canvas.Left="684" Canvas.Top="360" Height="36" Width="56" HorizontalAlignment="Left" VerticalAlignment="Center" Click="butQuitter_Click"/>
     </Canvas>
 
 </UserControl>

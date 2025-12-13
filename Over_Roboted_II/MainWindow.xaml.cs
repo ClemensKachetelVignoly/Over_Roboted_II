@@ -20,7 +20,7 @@ namespace Over_Roboted_II
         public UCGame _game = new UCGame();
         public UCParameters _parameters = new UCParameters();
         public UCDemarrage _demarrage = new UCDemarrage();
-
+        public UCRegles _regles = new UCRegles();
         //public Window mainWindow { get; } = (MainWindow)(Application.Current.MainWindow);
 
         public static MainWindow mainWindow = ((MainWindow)(Application.Current.MainWindow));
@@ -46,6 +46,10 @@ namespace Over_Roboted_II
             else if (uc == "_parameters")
             {
                 contentControl.Content = _parameters;
+            }
+            else if (uc == "_regles")
+            {
+                contentControl.Content = _regles;
             }
         }
     }

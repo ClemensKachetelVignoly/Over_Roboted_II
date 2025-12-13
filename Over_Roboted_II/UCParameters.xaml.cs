@@ -88,5 +88,10 @@ namespace Over_Roboted_II
                 dic2[item.Key] = item.Value;
             }
         }
+
+        private void butRetour_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.mainWindow.ShowUC("_demarrage");
+        }
     }
 }

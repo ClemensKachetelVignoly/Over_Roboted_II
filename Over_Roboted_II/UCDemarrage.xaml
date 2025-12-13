@@ -13,9 +13,10 @@
 
 
 
-        <Button x:Name="butRegles" Content="Règles" Canvas.Left="522" Canvas.Top="544" Width="237" Height="48" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button x:Name="butRegles" Content="Règles" Canvas.Left="522" Canvas.Top="544" Width="237" Height="48" HorizontalAlignment="Center" VerticalAlignment="Top" Click="butRegles_Click"/>
         <Button x:Name="butDemarrer" Content="Démarrer" Canvas.Left="522" Canvas.Top="488" Click="butDemarrer_Click" Width="237" Height="54" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button x:Name="butParametres" Content="Paramètres" Canvas.Left="522" Canvas.Top="596" Width="237" Height="49" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button x:Name="butParametres" Content="Paramètres" Canvas.Left="522" Canvas.Top="596" Width="237" Height="49" HorizontalAlignment="Left" VerticalAlignment="Center" Click="butParametres_Click"/>
+        <Button x:Name="butQuitterJeu" Content="Quitter le jeu" Canvas.Left="522" Canvas.Top="650" HorizontalAlignment="Center" VerticalAlignment="Top" Width="237" Height="48" Click="butQuitterJeu_Click" />
     </Canvas>
 
 
