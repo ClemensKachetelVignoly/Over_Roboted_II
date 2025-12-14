@@ -12,7 +12,11 @@
                 <ScaleTransform x:Name="GameScale"/>
             </Canvas.LayoutTransform>
 
-            <Rectangle x:Name="Player" Width="80" Height="80" Fill="Red" Canvas.Left="0" Canvas.Top="0"/>
+            <Image x:Name="Player"
+       Width="80" Height="80"
+       Canvas.Left="0" Canvas.Top="0"
+       RenderOptions.BitmapScalingMode="NearestNeighbor"
+       Stretch="Fill"/>
         </Canvas>
         <Grid x:Name="Popup" Visibility="Collapsed">
             <Border Background="Black"

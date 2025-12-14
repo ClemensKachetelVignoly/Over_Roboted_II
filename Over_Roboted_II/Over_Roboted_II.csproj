@@ -14,6 +14,26 @@
     <None Remove="Images\CraftingTable.jpg" />
     <None Remove="Images\CraftingTableError.jpg" />
     <None Remove="Images\CraftingTableOK.jpg" />
+    <None Remove="Images\Miku\derriere1.png" />
+    <None Remove="Images\Miku\derriere2.png" />
+    <None Remove="Images\Miku\derriere3.png" />
+    <None Remove="Images\Miku\derriere4.png" />
+    <None Remove="Images\Miku\derriere5.png" />
+    <None Remove="Images\Miku\devant1.png" />
+    <None Remove="Images\Miku\devant2.png" />
+    <None Remove="Images\Miku\devant3.png" />
+    <None Remove="Images\Miku\devant4.png" />
+    <None Remove="Images\Miku\devant5.png" />
+    <None Remove="Images\Miku\droite1.png" />
+    <None Remove="Images\Miku\droite2.png" />
+    <None Remove="Images\Miku\droite3.png" />
+    <None Remove="Images\Miku\droite4.png" />
+    <None Remove="Images\Miku\droite5.png" />
+    <None Remove="Images\Miku\gauche1.png" />
+    <None Remove="Images\Miku\gauche2.png" />
+    <None Remove="Images\Miku\gauche3.png" />
+    <None Remove="Images\Miku\gauche4.png" />
+    <None Remove="Images\Miku\gauche5.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +41,26 @@
     <Resource Include="Images\CraftingTable.jpg" />
     <Resource Include="Images\CraftingTableError.jpg" />
     <Resource Include="Images\CraftingTableOK.jpg" />
+    <Resource Include="Images\Miku\derriere1.png" />
+    <Resource Include="Images\Miku\derriere2.png" />
+    <Resource Include="Images\Miku\derriere3.png" />
+    <Resource Include="Images\Miku\derriere4.png" />
+    <Resource Include="Images\Miku\derriere5.png" />
+    <Resource Include="Images\Miku\devant1.png" />
+    <Resource Include="Images\Miku\devant2.png" />
+    <Resource Include="Images\Miku\devant3.png" />
+    <Resource Include="Images\Miku\devant4.png" />
+    <Resource Include="Images\Miku\devant5.png" />
+    <Resource Include="Images\Miku\droite1.png" />
+    <Resource Include="Images\Miku\droite2.png" />
+    <Resource Include="Images\Miku\droite3.png" />
+    <Resource Include="Images\Miku\droite4.png" />
+    <Resource Include="Images\Miku\droite5.png" />
+    <Resource Include="Images\Miku\gauche1.png" />
+    <Resource Include="Images\Miku\gauche2.png" />
+    <Resource Include="Images\Miku\gauche3.png" />
+    <Resource Include="Images\Miku\gauche4.png" />
+    <Resource Include="Images\Miku\gauche5.png" />
   </ItemGroup>
 
 </Project>
