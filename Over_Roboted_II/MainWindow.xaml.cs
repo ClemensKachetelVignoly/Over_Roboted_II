@@ -21,8 +21,6 @@ namespace Over_Roboted_II
         public UCParameters _parameters = new UCParameters();
         public UCDemarrage _demarrage = new UCDemarrage();
 
-        //public Window mainWindow { get; } = (MainWindow)(Application.Current.MainWindow);
-
         public static MainWindow mainWindow = ((MainWindow)(Application.Current.MainWindow));
 
         public MainWindow()

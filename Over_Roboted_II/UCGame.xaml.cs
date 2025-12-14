@@ -175,7 +175,6 @@ namespace Over_Roboted_II
             
             foreach (var c in CraftingTables)
             {
-                //c.Interact(new Rect(posX + Player.Width / 2, posY, 0, Player.Height));
                 c.Interact(playerHitbox);
             }
         }
@@ -198,6 +197,7 @@ namespace Over_Roboted_II
             if (e.Key == Key.Z) inputY = -1;
             if (e.Key == Key.S) inputY = 1;
             if (e.Key == Key.Space) MainWindow.mainWindow.Close();
+            if (e.Key == Key.E) ShowPopUp();
         }
 
         private void GameKeyUp(object sender, KeyEventArgs e)
@@ -207,6 +207,25 @@ namespace Over_Roboted_II
 
             if ((e.Key == Key.Z) && inputY == -1) inputY = 0;
             if ((e.Key == Key.S) && inputY == 1) inputY = 0;
+        }
+
+        private void ShowPopUp()
+        {
+            foreach (var c in CraftingTables)
+            {
+                if (c.canInteract)
+                {
+                    if (stopwatch.IsRunning)
+                    {
+                        stopwatch.Stop();
+                    } else
+                    {
+                        stopwatch.Start();
+                    }
+                    Popup.Visibility = Popup.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+                }
+            }
+            
         }
 
         private void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)

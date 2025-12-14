@@ -133,7 +133,7 @@ namespace Over_Roboted_II
 
         public void Interact(Rect playerHitbox)
         {
-            if (playerHitbox.IntersectsWith(this.InteractHitbox) && imgCT.Source != sourceError)
+            if (playerHitbox.IntersectsWith(this.InteractHitbox) && !isDragging)
             {
                 foreach (var c in AllCraftingTables)
                 {

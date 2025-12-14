@@ -14,5 +14,26 @@
 
             <Rectangle x:Name="Player" Width="80" Height="80" Fill="Red" Canvas.Left="0" Canvas.Top="0"/>
         </Canvas>
+        <Grid x:Name="Popup" Visibility="Collapsed">
+            <Border Background="Black"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="900"
+                Height="500"
+                CornerRadius="10">
+                <TextBlock Text="CRAFTING TABLE"
+                   Foreground="White"
+                   FontSize="32"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"/>
+            </Border>
+            <Border Background="White"
+                    Height="400"
+                    Width="550" HorizontalAlignment="Left" Margin="240,0,0,0"/>
+            <Border Background="White"
+                    Height="400"
+                    Width="200" HorizontalAlignment="Left" Margin="840,160,0,160"/>
+        </Grid>
+
     </Grid>
 </UserControl>
