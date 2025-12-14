@@ -34,6 +34,9 @@
     <None Remove="Images\Miku\gauche3.png" />
     <None Remove="Images\Miku\gauche4.png" />
     <None Remove="Images\Miku\gauche5.png" />
+    <None Remove="Images\ressource1.jpg" />
+    <None Remove="Images\ressource2.jpg" />
+    <None Remove="Images\ressource3.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -61,6 +64,9 @@
     <Resource Include="Images\Miku\gauche3.png" />
     <Resource Include="Images\Miku\gauche4.png" />
     <Resource Include="Images\Miku\gauche5.png" />
+    <Resource Include="Images\ressource1.jpg" />
+    <Resource Include="Images\ressource2.jpg" />
+    <Resource Include="Images\ressource3.jpg" />
   </ItemGroup>
 
 </Project>

@@ -24,6 +24,7 @@ namespace Over_Roboted_II
     public partial class UCGame : UserControl
     {
         List<CraftingTable> CraftingTables = new List<CraftingTable>();
+        List<Ressources> Ressources = new List<Ressources>();
 
         public Stopwatch stopwatch = new Stopwatch();
 
@@ -59,6 +60,7 @@ namespace Over_Roboted_II
         {
             InitializeComponent();
             InitializeCraftingTable();
+            InitializeRessources();
 
             SizeChanged += OnWindowSizeChanged;
 
@@ -84,6 +86,16 @@ namespace Over_Roboted_II
                 c.Draw(GameCanvas);
             }
 
+        }
+        private void InitializeRessources()
+        {
+            Ressources.Add(new Ressources(600, 400));
+            Ressources.Add(new Ressources(800, 200));
+            Ressources.Add(new Ressources(1000, 300));
+            foreach (var r in Ressources)
+            {
+                r.Draw(GameCanvas);
+            }
         }
         private void LoadPlayerFrames()
         {
