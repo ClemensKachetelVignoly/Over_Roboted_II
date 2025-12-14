@@ -24,27 +24,27 @@ namespace Over_Roboted_II
 
 
         public Image imgR;
-        public BitmapImage source1;
-        public BitmapImage source2;
-        public BitmapImage source3;
+        public BitmapImage source;
+        
 
         public int X { get; set; }
         public int Y { get; set; }
 
         public bool canInteract = false;
         public bool isInteracting = false;
-        public Ressources(int x, int y)
+        public Ressources(int x, int y, string imageRelativePath)
         {
             X = x;
             Y = y;
 
-            source1 = new BitmapImage(new Uri("pack://application:,,,/Images/ressource1.jpg"));
-            source2 = new BitmapImage(new Uri("pack://application:,,,/Images/ressource2.jpg"));
-            source3 = new BitmapImage(new Uri("pack://application:,,,/Images/ressource3.jpg"));
+            source = new BitmapImage(new Uri(imageRelativePath));
+            
+
+            
 
             imgR = new Image
             {
-                Source = source1
+                Source = source
             };
 
             
