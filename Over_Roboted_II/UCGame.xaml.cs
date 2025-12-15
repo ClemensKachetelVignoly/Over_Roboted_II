@@ -24,7 +24,8 @@ namespace Over_Roboted_II
     public partial class UCGame : UserControl
     {
         List<CraftingTable> CraftingTables = new List<CraftingTable>();
-        List<Ressources> Ressources = new List<Ressources>();
+        List<ResourceGenerator> ResourceGenerators = new List<ResourceGenerator>();
+        List<Resource> Resources = new List<Resource>();
 
         public Stopwatch stopwatch = new Stopwatch();
 
@@ -60,7 +61,7 @@ namespace Over_Roboted_II
         {
             InitializeComponent();
             InitializeCraftingTable();
-            InitializeRessources();
+            InitializeResourceGenerators();
 
             SizeChanged += OnWindowSizeChanged;
 
@@ -87,13 +88,17 @@ namespace Over_Roboted_II
             }
 
         }
-        private void InitializeRessources()
+        private void InitializeResourceGenerators()
         {
-            Ressources.Add(new Ressources(600, 400, "gold"));
-            Ressources.Add(new Ressources(800, 200, "diamond"));
-            Ressources.Add(new Ressources(1000, 300, "copper"));
+            Resources.Add(new Resource("copper", 10));
+            Resources.Add(new Resource("diamond", 20));
+            Resources.Add(new Resource("gold", 30));
+            
+            ResourceGenerators.Add(new ResourceGenerator(600, 400, Resources[0]));
+            ResourceGenerators.Add(new ResourceGenerator(800, 200, Resources[1]));
+            ResourceGenerators.Add(new ResourceGenerator(1000, 300, Resources[2]));
 
-            foreach (var r in Ressources)
+            foreach (var r in ResourceGenerators)
             {
                 r.Draw(GameCanvas);
             }
@@ -158,6 +163,11 @@ namespace Over_Roboted_II
         }
         private void GameLoop(object sender, EventArgs e)
         {
+            Console.Clear();
+            Console.WriteLine($"Copper {Resources[0].Amount}");
+            Console.WriteLine($"Gold {Resources[1].Amount}");
+            Console.WriteLine($"Diamond {Resources[2].Amount}");
+
             double current = stopwatch.Elapsed.TotalSeconds;
             double deltaTime = current - lastFrameTime;
             lastFrameTime = current;
@@ -320,15 +330,16 @@ namespace Over_Roboted_II
                 {
                     if (stopwatch.IsRunning)
                     {
+                        c.isInteracting = true;
                         stopwatch.Stop();
                     } else
                     {
+                        c.isInteracting = false;
                         stopwatch.Start();
                     }
                     Popup.Visibility = Popup.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
                 }
             }
-            
         }
 
         private void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)

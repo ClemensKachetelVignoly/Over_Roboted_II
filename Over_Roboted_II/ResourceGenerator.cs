@@ -19,26 +19,27 @@ using System.Windows.Shapes;
 
 namespace Over_Roboted_II
 {
-    internal class Ressources
+    internal class ResourceGenerator
     {
-        private static List<Ressources> AllRessources = new List<Ressources>();
-
-        public Image imgR;
-        public BitmapImage source;
-        
+        private static List<ResourceGenerator> AllRessourceGenerators = new List<ResourceGenerator>();
 
         public int X { get; set; }
         public int Y { get; set; }
+        public Resource Res { get; set; }
+
+        public Image imgR;
+        public BitmapImage source;
 
         public bool canInteract = false;
         public bool isInteracting = false;
 
-        public Ressources(int x, int y, string ressourceType)
+        public ResourceGenerator(int x, int y, Resource resource)
         {
             X = x;
             Y = y;
+            Res = resource;
 
-            switch (ressourceType)
+            switch (Res.Name)
             {
                 case "gold" :
                     source = new BitmapImage(new Uri("pack://application:,,,/Images/ressource1.jpg"));
@@ -59,13 +60,13 @@ namespace Over_Roboted_II
                 Source = source
             };
 
-            AllRessources.Add(this);
+            AllRessourceGenerators.Add(this);
         }
         public void Interact(Rect playerHitbox)
         {
             if (playerHitbox.IntersectsWith(this.InteractHitbox))
             {
-                foreach (var c in AllRessources)
+                foreach (var c in AllRessourceGenerators)
                 {
                     if (c.imgR.Opacity == 0.7)
                     {
@@ -84,6 +85,15 @@ namespace Over_Roboted_II
             canvas.Children.Add(imgR);
             Canvas.SetLeft(imgR, X);
             Canvas.SetTop(imgR, Y);
+
+            Rectangle rect = new Rectangle();
+            rect.Height = 150;
+            rect.Width = 140;
+            rect.Fill = Brushes.Blue;
+            canvas.Children.Add(rect);
+            Canvas.SetZIndex(rect, -1);
+            Canvas.SetLeft(rect, Canvas.GetLeft(imgR) - 10);
+            Canvas.SetTop(rect, Canvas.GetTop(imgR) - 10);
         }
 
         public Rect Hitbox => new Rect(X, Y, 130, 120);

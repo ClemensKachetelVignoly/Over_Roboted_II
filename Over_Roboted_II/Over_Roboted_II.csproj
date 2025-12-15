@@ -36,7 +36,7 @@
     <None Remove="Images\Miku\gauche5.png" />
     <None Remove="Images\ressource1.jpg" />
     <None Remove="Images\ressource2.jpg" />
-    <None Remove="Images\ressource3.jpg" />
+    <None Remove="Images\resdource3.jpg" />
   </ItemGroup>
 
   <ItemGroup>
