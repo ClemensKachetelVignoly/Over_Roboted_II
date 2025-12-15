@@ -89,9 +89,9 @@ namespace Over_Roboted_II
         }
         private void InitializeRessources()
         {
-            Ressources.Add(new Ressources(600, 400,"Image/ressource1"));
-            Ressources.Add(new Ressources(800, 200,"Image/ressource2"));
-            Ressources.Add(new Ressources(1000, 300,"Image/ressource3"));
+            Ressources.Add(new Ressources(600, 400, "pack://application:,,,/Images/ressource1.jpg"));
+            Ressources.Add(new Ressources(900, 200, "pack://application:,,,/Images/ressource2.jpg"));
+            Ressources.Add(new Ressources(1000, 300, "pack://application:,,,/Images/ressource3.jpg"));
             foreach (var r in Ressources)
             {
                 r.Draw(GameCanvas);
