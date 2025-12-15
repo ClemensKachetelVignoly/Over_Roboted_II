@@ -6,7 +6,13 @@
              xmlns:local="clr-namespace:Over_Roboted_II"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1280" Loaded="UserControl_Loaded">
+    
     <Grid>
+        <StackPanel x:Name="ResourcesPanel"
+Orientation="Vertical"
+HorizontalAlignment="Left"
+VerticalAlignment="Top"
+Margin="10"/>
         <Canvas x:Name="GameCanvas" Width="1280" Height="720">
             <Canvas.LayoutTransform>
                 <ScaleTransform x:Name="GameScale"/>
