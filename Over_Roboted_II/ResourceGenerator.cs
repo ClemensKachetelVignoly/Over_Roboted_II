@@ -31,7 +31,6 @@ namespace Over_Roboted_II
         public BitmapImage source;
 
         public bool canInteract = false;
-        public bool isInteracting = false;
 
         public ResourceGenerator(int x, int y, Resource resource)
         {
@@ -68,13 +67,14 @@ namespace Over_Roboted_II
             {
                 foreach (var c in AllRessourceGenerators)
                 {
-                    if (c.imgR.Opacity == 0.7)
-                    {
-                        c.imgR.Opacity = 1;
-                    }
-                    imgR.Opacity = 0.7;
-                    canInteract = true;
+                    c.imgR.Opacity = 1;
                 }
+                this.imgR.Opacity = 0.7;
+                canInteract = true;
+            } else
+            {
+                imgR.Opacity = 1;
+                canInteract= false;
             }
         }
 
@@ -85,15 +85,6 @@ namespace Over_Roboted_II
             canvas.Children.Add(imgR);
             Canvas.SetLeft(imgR, X);
             Canvas.SetTop(imgR, Y);
-
-            Rectangle rect = new Rectangle();
-            rect.Height = 150;
-            rect.Width = 140;
-            rect.Fill = Brushes.Blue;
-            canvas.Children.Add(rect);
-            Canvas.SetZIndex(rect, -1);
-            Canvas.SetLeft(rect, Canvas.GetLeft(imgR) - 10);
-            Canvas.SetTop(rect, Canvas.GetTop(imgR) - 10);
         }
 
         public Rect Hitbox => new Rect(X, Y, 130, 120);

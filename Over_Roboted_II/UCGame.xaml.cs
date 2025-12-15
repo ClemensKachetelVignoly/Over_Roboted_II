@@ -23,9 +23,9 @@ namespace Over_Roboted_II
     /// </summary>
     public partial class UCGame : UserControl
     {
-        List<CraftingTable> CraftingTables = new List<CraftingTable>();
-        List<ResourceGenerator> ResourceGenerators = new List<ResourceGenerator>();
-        List<Resource> Resources = new List<Resource>();
+        List<CraftingTable> CraftingTablesList = new List<CraftingTable>();
+        List<ResourceGenerator> ResourceGeneratorsList = new List<ResourceGenerator>();
+        List<Resource> ResourcesList = new List<Resource>();
 
         public Stopwatch stopwatch = new Stopwatch();
 
@@ -61,7 +61,7 @@ namespace Over_Roboted_II
         {
             InitializeComponent();
             InitializeCraftingTable();
-            InitializeResourceGenerators();
+            InitializeResourceGeneratorsList();
 
             SizeChanged += OnWindowSizeChanged;
 
@@ -76,29 +76,38 @@ namespace Over_Roboted_II
             CompositionTarget.Rendering += GameLoop;
         }
 
+        private void UpdateResourceVisual()
+        {
+            ResourcesPanel.Children.Clear();
+            foreach (var r in ResourcesList)
+            {
+                ResourcesPanel.Children.Add(r.Draw());
+            }
+        }
+
         private void InitializeCraftingTable()
         {
-            CraftingTables.Add(new CraftingTable(200, 500));
-            CraftingTables.Add(new CraftingTable(360, 0));
-            CraftingTables.Add(new CraftingTable(520, 0));
+            CraftingTablesList.Add(new CraftingTable(200, 500));
+            CraftingTablesList.Add(new CraftingTable(360, 0));
+            CraftingTablesList.Add(new CraftingTable(520, 0));
 
-            foreach (var c in CraftingTables)
+            foreach (var c in CraftingTablesList)
             {
                 c.Draw(GameCanvas);
             }
 
         }
-        private void InitializeResourceGenerators()
+        private void InitializeResourceGeneratorsList()
         {
-            Resources.Add(new Resource("copper", 10));
-            Resources.Add(new Resource("diamond", 20));
-            Resources.Add(new Resource("gold", 30));
+            ResourcesList.Add(new Resource("copper", 0));
+            ResourcesList.Add(new Resource("diamond", 0));
+            ResourcesList.Add(new Resource("gold", 0));
             
-            ResourceGenerators.Add(new ResourceGenerator(600, 400, Resources[0]));
-            ResourceGenerators.Add(new ResourceGenerator(800, 200, Resources[1]));
-            ResourceGenerators.Add(new ResourceGenerator(1000, 300, Resources[2]));
+            ResourceGeneratorsList.Add(new ResourceGenerator(100, 50, ResourcesList[0]));
+            ResourceGeneratorsList.Add(new ResourceGenerator(800, 200, ResourcesList[1]));
+            ResourceGeneratorsList.Add(new ResourceGenerator(1000, 300, ResourcesList[2]));
 
-            foreach (var r in ResourceGenerators)
+            foreach (var r in ResourceGeneratorsList)
             {
                 r.Draw(GameCanvas);
             }
@@ -163,11 +172,6 @@ namespace Over_Roboted_II
         }
         private void GameLoop(object sender, EventArgs e)
         {
-            Console.Clear();
-            Console.WriteLine($"Copper {Resources[0].Amount}");
-            Console.WriteLine($"Gold {Resources[1].Amount}");
-            Console.WriteLine($"Diamond {Resources[2].Amount}");
-
             double current = stopwatch.Elapsed.TotalSeconds;
             double deltaTime = current - lastFrameTime;
             lastFrameTime = current;
@@ -235,9 +239,17 @@ namespace Over_Roboted_II
             Rect futureX = new Rect(newX, posY, Player.Width, Player.Height);
             bool collideX = false;
 
-            foreach (var c in CraftingTables)
+            foreach (var c in CraftingTablesList)
             {
                 if (futureX.IntersectsWith(c.Hitbox))
+                {
+                    collideX = true;
+                    break;
+                }
+            }
+            foreach (var r in ResourceGeneratorsList)
+            {
+                if (futureX.IntersectsWith(r.Hitbox))
                 {
                     collideX = true;
                     break;
@@ -253,9 +265,17 @@ namespace Over_Roboted_II
             Rect futureY = new Rect(posX, newY, Player.Width, Player.Height);
             bool collideY = false;
 
-            foreach (var c in CraftingTables)
+            foreach (var c in CraftingTablesList)
             {
                 if (futureY.IntersectsWith(c.Hitbox))
+                {
+                    collideY = true;
+                    break;
+                }
+            }
+            foreach (var r in ResourceGeneratorsList)
+            {
+                if (futureY.IntersectsWith(r.Hitbox))
                 {
                     collideY = true;
                     break;
@@ -272,9 +292,13 @@ namespace Over_Roboted_II
 
             playerHitbox = new Rect(posX, posY, Player.Width, Player.Height);
             
-            foreach (var c in CraftingTables)
+            foreach (var c in CraftingTablesList)
             {
                 c.Interact(playerHitbox);
+            }
+            foreach (var r in ResourceGeneratorsList)
+            {
+                r.Interact(playerHitbox);
             }
         }
 
@@ -296,7 +320,7 @@ namespace Over_Roboted_II
             if (e.Key == Key.Z) { inputY = -1; SetDirection(Dir.Up); StartFrameTimer(); }
             if (e.Key == Key.S) { inputY = 1; SetDirection(Dir.Down); StartFrameTimer(); }
             if (e.Key == Key.Space) MainWindow.mainWindow.Close();
-            if (e.Key == Key.E) ShowPopUp();
+            if (e.Key == Key.E) Interact();
         }
 
         private void GameKeyUp(object sender, KeyEventArgs e)
@@ -322,9 +346,11 @@ namespace Over_Roboted_II
             }
         }
 
-        private void ShowPopUp()
+        private void Interact()
         {
-            foreach (var c in CraftingTables)
+            bool interactCrafting = false;
+
+            foreach (var c in CraftingTablesList)
             {
                 if (c.canInteract)
                 {
@@ -338,6 +364,18 @@ namespace Over_Roboted_II
                         stopwatch.Start();
                     }
                     Popup.Visibility = Popup.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+                    interactCrafting = true;
+                }
+            }
+            if (!interactCrafting)
+            {
+                foreach (var r in ResourceGeneratorsList)
+                {
+                    if (r.canInteract)
+                    {
+                        r.Res.Add(1);
+                        UpdateResourceVisual();
+                    }
                 }
             }
         }
