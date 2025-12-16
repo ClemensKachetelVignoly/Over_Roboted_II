@@ -96,8 +96,11 @@
     <Resource Include="Images\ressource1.jpg" />
     <Resource Include="Images\ressource2.jpg" />
     <Resource Include="Images\ressource3.jpg" />
+    <Resource Include="Images\Robot\bras21.png" />
     <Resource Include="Images\Robot\bras1.png" />
+    <Resource Include="Images\Robot\bras22.png" />
     <Resource Include="Images\Robot\bras2.png" />
+    <Resource Include="Images\Robot\bras23.png" />
     <Resource Include="Images\Robot\bras3.png" />
     <Resource Include="Images\Robot\corps1.png" />
     <Resource Include="Images\Robot\corps2.png" />
