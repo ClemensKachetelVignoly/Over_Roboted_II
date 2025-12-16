@@ -31,6 +31,7 @@ namespace Over_Roboted_II
 
         private void butQuitter_Click(object sender, RoutedEventArgs e)
         {
+            UCDemarrage.sonClick.Play();
             MainWindow.mainWindow.ShowUC("_demarrage");
         }
     }

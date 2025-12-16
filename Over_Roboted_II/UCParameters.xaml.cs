@@ -37,6 +37,8 @@ namespace Over_Roboted_II
             /// Les paramètres retournent à leur état d'origine
             /// </summary>
 
+
+            UCDemarrage.sonClick.Play();
             UpdateValues(parametersDict, tempDict);
             UpdateSettings(parametersDict, 0);
             MainWindow.mainWindow.ShowUC("_game");
@@ -47,7 +49,7 @@ namespace Over_Roboted_II
             /// <summary>
             ///  L'utilisateur ferme la fenêtre des paramètres avec mise à jour
             /// </summary>
-
+            UCDemarrage.sonClick.Play();
             UpdateValues(tempDict, parametersDict);
             UpdateSettings(parametersDict, 1);
             MainWindow.mainWindow.ShowUC("_game");
@@ -55,6 +57,7 @@ namespace Over_Roboted_II
 
         private void CheckFullscreen_Click(object sender, RoutedEventArgs e)
         {
+            UCDemarrage.sonClick.Play();
             tempDict["fullscreen"] = (checkFullscreen.IsChecked == true).ToString();
         }
 
@@ -91,6 +94,7 @@ namespace Over_Roboted_II
 
         private void butRetour_Click(object sender, RoutedEventArgs e)
         {
+            UCDemarrage.sonClick.Play();
             MainWindow.mainWindow.ShowUC("_demarrage");
         }
     }

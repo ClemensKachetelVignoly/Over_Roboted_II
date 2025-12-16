@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Media;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,16 +22,17 @@ namespace Over_Roboted_II
         public UCParameters _parameters = new UCParameters();
         public UCDemarrage _demarrage = new UCDemarrage();
         public UCRegles _regles = new UCRegles();
-        //public Window mainWindow { get; } = (MainWindow)(Application.Current.MainWindow);
-
+        
         public static MainWindow mainWindow = ((MainWindow)(Application.Current.MainWindow));
 
         public MainWindow()
         {
             InitializeComponent();
             ShowUC("_demarrage"); 
+            
         }
-       
+        
+        
         public void ShowUC(string uc)
         {                    
             if (uc == "_demarrage")

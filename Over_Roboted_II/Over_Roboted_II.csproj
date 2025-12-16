@@ -10,6 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Audio\sonAppuiBouton.wav" />
+    <None Remove="Audio\sonBouton.wav" />
+    <None Remove="Audio\sonBouton2.wav" />
+    <None Remove="Audio\sonBoutonAppui.wav" />
+    <None Remove="Audio\sonLancementJeu.wav" />
     <None Remove="Images\backgroudJeu.png" />
     <None Remove="Images\backgroundAccueil.jpg" />
     <None Remove="Images\carreGris.png" />
@@ -57,6 +62,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Audio\sonBoutonAppui.wav" />
+    <Resource Include="Audio\sonLancementJeu.wav" />
     <Resource Include="Images\backgroudJeu.png" />
     <Resource Include="Images\backgroundAccueil.jpg" />
     <Resource Include="Images\carreGris.png" />
