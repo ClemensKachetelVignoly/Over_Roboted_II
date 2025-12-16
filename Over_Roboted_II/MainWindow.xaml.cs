@@ -34,7 +34,7 @@ namespace Over_Roboted_II
             {
                 _game.stopwatch.Start();
                 contentControl.Content = _game;
-                musiqueJeu.Play();
+                
             }
 
             else if (uc == "_parameters")
