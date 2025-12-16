@@ -18,7 +18,7 @@
             </Canvas.Background>
             <Image x:Name="Player" Source="Images/Miku/devant1.png" Width="80" Height="80" Canvas.Left="0" Canvas.Top="0" RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="Fill"/>
         </Canvas>
-        <Grid x:Name="Popup" Visibility="Collapsed">
+        <Grid x:Name="Popup" Visibility="Visible">
             <Border Background="Black"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -33,14 +33,36 @@
             </Border>
             <Border Background="White"
                     Height="400"
-                    Width="550" HorizontalAlignment="Left" Margin="240,0,0,0"/>
+                    Width="550" HorizontalAlignment="Center" Margin="0,0,240,0">
+                
+            </Border>
             <Border Background="White"
                     Height="400"
-                    Width="200" HorizontalAlignment="Left" Margin="840,160,0,160"/>
-            <Image x:Name="img1" Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,553,200"/>
-            <Image x:Name="img2" Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,200"/>
-            <Image x:Name="img3" Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,200,553,0"/>
-
+                    Width="200" HorizontalAlignment="Center" Margin="600,160,0,160"/>
+            <Button x:Name="butImg1" Height="200" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,553,200" BorderBrush="{x:Null}" Click="butImg1_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Button.Template>
+                <Image x:Name="img1" Source="/Images/Robot/corps1.png"/>
+            </Button>
+            <Button x:Name="butImg2" Height="200" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,200" BorderBrush="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Button.Template>
+                <Image x:Name="img2" Source="/Images/Robot/corps2.png"/>
+            </Button>
+            <Button x:Name="butImg3" Height="200" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,200,553,0" BorderBrush="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Button.Template>
+                <Image x:Name="img3" Source="/Images/Robot/corps3.png"/>
+            </Button>
         </Grid>
 
 

@@ -330,6 +330,7 @@ namespace Over_Roboted_II
                         img1.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Robot/{c.Component}1.png"));
                         img2.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Robot/{c.Component}2.png"));
                         img3.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Robot/{c.Component}3.png"));
+
                         stopwatch.Stop();
                     }
                     else
@@ -374,6 +375,9 @@ namespace Over_Roboted_II
             GameScale.ScaleY = scale;
         }
 
-
+        private void butImg1_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
