@@ -30,7 +30,7 @@ namespace Over_Roboted_II
             {
                 Text = $"{this.Name} : {this.Amount}",
                 FontSize = 16,
-                Foreground = Brushes.Black,
+                Foreground = Brushes.White,
                 Margin = new Thickness(0, 2, 0, 2)
             };
 

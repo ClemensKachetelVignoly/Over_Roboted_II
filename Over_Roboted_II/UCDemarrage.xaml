@@ -12,11 +12,15 @@
         </Canvas.Background>
 
 
+        <Grid Height="720" Width="1280" >
+            <Image Height="258"  Source="/Images/carreGris.png" Stretch="Fill"  Width="332" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,462,0,0"/>
+            <Button x:Name="butRegles" Content="Règles"  Width="235" Height="54" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,-400" Click="butRegles_Click"/>
+            <Button x:Name="butDemarrer" Content="Démarrer"  Width="235" Height="54" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,-280" Click="butDemarrer_Click"/>
+            <Button x:Name="butParametres" Content="Paramètres"  Width="235" Height="54" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,-520" Click="butParametres_Click"/>
+            <Button x:Name="butQuitterJeu" Content="Quitter le jeu"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="235" Height="54" Margin="0,0,0,-640" Click="butQuitterJeu_Click" />
+            
+        </Grid>
 
-        <Button x:Name="butRegles" Content="Règles" Canvas.Left="522" Canvas.Top="544" Width="237" Height="48" HorizontalAlignment="Center" VerticalAlignment="Top" Click="butRegles_Click"/>
-        <Button x:Name="butDemarrer" Content="Démarrer" Canvas.Left="522" Canvas.Top="488" Click="butDemarrer_Click" Width="237" Height="54" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button x:Name="butParametres" Content="Paramètres" Canvas.Left="522" Canvas.Top="596" Width="237" Height="49" HorizontalAlignment="Left" VerticalAlignment="Center" Click="butParametres_Click"/>
-        <Button x:Name="butQuitterJeu" Content="Quitter le jeu" Canvas.Left="522" Canvas.Top="650" HorizontalAlignment="Center" VerticalAlignment="Top" Width="237" Height="48" Click="butQuitterJeu_Click" />
     </Canvas>
 
 

@@ -9,7 +9,7 @@
 
     <Grid>
         <StackPanel x:Name="ResourcesPanel" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
-        <Canvas x:Name="GameCanvas" Width="1280" Height="720">
+        <Canvas x:Name="GameCanvas" Width="1280" Height="720" Panel.ZIndex="-1">
             <Canvas.LayoutTransform>
                 <ScaleTransform x:Name="GameScale"/>
             </Canvas.LayoutTransform>

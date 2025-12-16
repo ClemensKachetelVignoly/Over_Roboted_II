@@ -12,6 +12,7 @@
   <ItemGroup>
     <None Remove="Images\backgroudJeu.png" />
     <None Remove="Images\backgroundAccueil.jpg" />
+    <None Remove="Images\carreGris.png" />
     <None Remove="Images\craftingtable1.jpg" />
     <None Remove="Images\craftingtable2.jpg" />
     <None Remove="Images\craftingtable3.jpg" />
@@ -46,6 +47,7 @@
   <ItemGroup>
     <Resource Include="Images\backgroudJeu.png" />
     <Resource Include="Images\backgroundAccueil.jpg" />
+    <Resource Include="Images\carreGris.png" />
     <Resource Include="Images\craftingtable1.jpg" />
     <Resource Include="Images\craftingtable2.jpg" />
     <Resource Include="Images\craftingtable3.jpg" />
