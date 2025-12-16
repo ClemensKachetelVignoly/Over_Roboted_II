@@ -60,7 +60,7 @@ namespace Over_Roboted_II
             SizeChanged += OnWindowSizeChanged;
             InitializeImagesMiku();
 
-
+            Commande cmd = new Commande(GameCanvas);
 
             stopwatch.Start();
             CompositionTarget.Rendering += GameLoop;
@@ -270,6 +270,8 @@ namespace Over_Roboted_II
             {
                 r.Interact(playerHitbox);
             }
+
+            
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
