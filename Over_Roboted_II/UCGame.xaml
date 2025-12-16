@@ -6,23 +6,15 @@
              xmlns:local="clr-namespace:Over_Roboted_II"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1280" Loaded="UserControl_Loaded">
-    
+
     <Grid>
-        <StackPanel x:Name="ResourcesPanel"
-Orientation="Vertical"
-HorizontalAlignment="Left"
-VerticalAlignment="Top"
-Margin="10"/>
+        <StackPanel x:Name="ResourcesPanel" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
         <Canvas x:Name="GameCanvas" Width="1280" Height="720">
             <Canvas.LayoutTransform>
                 <ScaleTransform x:Name="GameScale"/>
             </Canvas.LayoutTransform>
 
-            <Image x:Name="Player"
-       Width="80" Height="80"
-       Canvas.Left="0" Canvas.Top="0"
-       RenderOptions.BitmapScalingMode="NearestNeighbor"
-       Stretch="Fill"/>
+            <Image x:Name="Player" Source="Images/Miku/devant1.png" Width="80" Height="80" Canvas.Left="0" Canvas.Top="0" RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="Fill"/>
         </Canvas>
         <Grid x:Name="Popup" Visibility="Collapsed">
             <Border Background="Black"
@@ -44,6 +36,7 @@ Margin="10"/>
                     Height="400"
                     Width="200" HorizontalAlignment="Left" Margin="840,160,0,160"/>
         </Grid>
+
 
     </Grid>
 </UserControl>

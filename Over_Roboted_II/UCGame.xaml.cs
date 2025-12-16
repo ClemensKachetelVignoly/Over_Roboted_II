@@ -46,16 +46,10 @@ namespace Over_Roboted_II
         int inputX = 0;
         int inputY = 0;
 
-        public enum Dir { Down = 0, Up = 1, Right = 2, Left = 3 }
-        public readonly BitmapImage[][] _frames = new BitmapImage[4][];
-        public Dir _currentDir = Dir.Down;
-        public int _frameIndex = 0;
-        public double _animTimer = 0.0;
-        public readonly double _frameDuration = 0.10;
-        public readonly int _framesPerDirection = 5;
-
-        // Timer dédié à l'animation (ne modifie pas GameLoop)
-        private readonly DispatcherTimer _frameTimer;
+        BitmapImage[] imageDevant = new BitmapImage[5];
+        BitmapImage[] imageDerriere = new BitmapImage[5];
+        BitmapImage[] imageGauche = new BitmapImage[5];
+        BitmapImage[] imageDroite = new BitmapImage[5];
 
         public UCGame()
         {
@@ -64,13 +58,9 @@ namespace Over_Roboted_II
             InitializeResourceGeneratorsList();
 
             SizeChanged += OnWindowSizeChanged;
+            InitializeImagesMiku();
 
-            LoadPlayerFrames();
 
-            // initialisation du timer d'animation
-            _frameTimer = new DispatcherTimer();
-            _frameTimer.Interval = TimeSpan.FromSeconds(_frameDuration);
-            _frameTimer.Tick += FrameTimer_Tick;
 
             stopwatch.Start();
             CompositionTarget.Rendering += GameLoop;
@@ -87,9 +77,11 @@ namespace Over_Roboted_II
 
         private void InitializeCraftingTable()
         {
-            CraftingTablesList.Add(new CraftingTable(200, 500));
-            CraftingTablesList.Add(new CraftingTable(360, 0));
-            CraftingTablesList.Add(new CraftingTable(520, 0));
+            for (int i = 0; i < 4; i++)
+            {
+                CraftingTablesList.Add(new CraftingTable(200 + i * 180, 0, $"pack://application:,,,/Images/craftingtable{i + 1}.jpg"));
+            }
+
 
             foreach (var c in CraftingTablesList)
             {
@@ -102,7 +94,7 @@ namespace Over_Roboted_II
             ResourcesList.Add(new Resource("copper", 0));
             ResourcesList.Add(new Resource("diamond", 0));
             ResourcesList.Add(new Resource("gold", 0));
-            
+
             ResourceGeneratorsList.Add(new ResourceGenerator(100, 50, ResourcesList[0]));
             ResourceGeneratorsList.Add(new ResourceGenerator(800, 200, ResourcesList[1]));
             ResourceGeneratorsList.Add(new ResourceGenerator(1000, 300, ResourcesList[2]));
@@ -112,64 +104,30 @@ namespace Over_Roboted_II
                 r.Draw(GameCanvas);
             }
         }
-        private void LoadPlayerFrames()
+
+
+        private void InitializeImagesMiku()
         {
-            _frames[(int)Dir.Down] = LoadFramesFor("devant");
-            _frames[(int)Dir.Up] = LoadFramesFor("derriere");
-            _frames[(int)Dir.Right] = LoadFramesFor("droite");
-            _frames[(int)Dir.Left] = LoadFramesFor("gauche");
-
-            for (int i = 0; i < _frames.Length; i++)
+            for (int i = 0; i < imageDevant.Length; i++)
             {
-                if (_frames[i] == null || _frames[i].Length == 0)
-                    Debug.WriteLine($"[UCGame] Aucune frame chargée pour {((Dir)i).ToString()}. Vérifiez Images/Miku et Build Action.");
-            }
+                imageDevant[i] = new BitmapImage(new Uri($"pack://application:,,,/Images/Miku/devant{i + 1}.png"));
+                imageDerriere[i] = new BitmapImage(new Uri($"pack://application:,,,/Images/Miku/derriere{i + 1}.png"));
+                imageDroite[i] = new BitmapImage(new Uri($"pack://application:,,,/Images/Miku/droite{i + 1}.png"));
+                imageGauche[i] = new BitmapImage(new Uri($"pack://application:,,,/Images/Miku/gauche{i + 1}.png"));
 
-            // Image initiale de secours
-            var start = _frames[(int)_currentDir];
-            if (start != null && start.Length > 0)
-                Player.Source = start[0];
+            }
         }
-        private BitmapImage[] LoadFramesFor(string direction)
+        int nombre = 0;
+        public void AnimeMiku(BitmapImage[] tabImg)
         {
-            var list = new List<BitmapImage>();
-            string asm = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
-            for (int i = 0; i < _framesPerDirection; i++)
-            {
-                string relative = $"Images/Miku/{direction}{i + 1}.png";
-                string packUri1 = $"pack://application:,,,/{asm};component/{relative}";
-                string packUri2 = $"pack://application:,,,/{relative}";
-                bool loaded = false;
 
-                foreach (var packUri in new[] { packUri1, packUri2 })
-                {
-                    try
-                    {
-                        var uri = new Uri(packUri, UriKind.Absolute);
-                        var bmp = new BitmapImage();
-                        bmp.BeginInit();
-                        bmp.UriSource = uri;
-                        bmp.CacheOption = BitmapCacheOption.OnLoad;
-                        bmp.EndInit();
-                        bmp.Freeze();
-                        list.Add(bmp);
-                        Debug.WriteLine($"[UCGame] Chargée : {packUri}");
-                        loaded = true;
-                        break;
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.WriteLine($"[UCGame] Erreur chargement {packUri} : {ex.Message}");
-                    }
-                }
-
-                if (!loaded)
-                {
-                    Debug.WriteLine($"[UCGame] Échec complet pour {relative}");
-                }
-            }
-            return list.ToArray();
+            nombre++;
+            if (nombre / 5 == tabImg.Length)
+                nombre = 1;
+            if (nombre % 5 == 0)
+                Player.Source = tabImg[nombre / 5];
         }
+
         private void GameLoop(object sender, EventArgs e)
         {
             double current = stopwatch.Elapsed.TotalSeconds;
@@ -182,6 +140,10 @@ namespace Over_Roboted_II
             {
                 velX += inputX * acceleration * deltaTime;
                 velX = Math.Clamp(velX, -maxSpeed, maxSpeed);
+                if (inputX > 0)
+                    AnimeMiku(imageDroite);
+                else
+                    AnimeMiku(imageGauche);
             }
             else
             {
@@ -204,6 +166,14 @@ namespace Over_Roboted_II
             {
                 velY += inputY * acceleration * deltaTime;
                 velY = Math.Clamp(velY, -maxSpeed, maxSpeed);
+                if (inputX > 0)
+                    AnimeMiku(imageDroite);
+                else if (inputX < 0)
+                    AnimeMiku(imageGauche);
+                else if (inputY > 0)
+                    AnimeMiku(imageDevant);
+                else
+                    AnimeMiku(imageDerriere);
             }
             else
             {
@@ -291,7 +261,7 @@ namespace Over_Roboted_II
             Canvas.SetTop(Player, posY);
 
             playerHitbox = new Rect(posX, posY, Player.Width, Player.Height);
-            
+
             foreach (var c in CraftingTablesList)
             {
                 c.Interact(playerHitbox);
@@ -315,12 +285,31 @@ namespace Over_Roboted_II
                 MainWindow.mainWindow.ShowUC("_parameters");
                 stopwatch.Stop();
             }
-            if (e.Key == Key.Q) { inputX = -1; SetDirection(Dir.Left); StartFrameTimer(); }
-            if (e.Key == Key.D) { inputX = 1; SetDirection(Dir.Right); StartFrameTimer(); }
-            if (e.Key == Key.Z) { inputY = -1; SetDirection(Dir.Up); StartFrameTimer(); }
-            if (e.Key == Key.S) { inputY = 1; SetDirection(Dir.Down); StartFrameTimer(); }
-            if (e.Key == Key.Space) MainWindow.mainWindow.Close();
-            if (e.Key == Key.E) Interact();
+            if (e.Key == Key.Q)
+            {
+                inputX = -1;
+
+            }
+            if (e.Key == Key.D)
+            {
+                inputX = 1;
+
+            }
+            if (e.Key == Key.Z)
+            {
+                inputY = -1;
+
+            }
+            if (e.Key == Key.S)
+            {
+                inputY = 1;
+
+
+            }
+            if (e.Key == Key.Space)
+                MainWindow.mainWindow.Close();
+            if (e.Key == Key.E)
+                Interact();
         }
 
         private void GameKeyUp(object sender, KeyEventArgs e)
@@ -331,19 +320,7 @@ namespace Over_Roboted_II
             if ((e.Key == Key.Z) && inputY == -1) inputY = 0;
             if ((e.Key == Key.S) && inputY == 1) inputY = 0;
 
-            // si plus aucune touche de déplacement pressée, stopper l'animation
-            if (inputX == 0 && inputY == 0)
-            {
-                StopFrameTimer();
-            }
-            else
-            {
-                // si on a encore un axe maintenu, on s'assure que la direction correspond
-                if (inputX > 0) SetDirection(Dir.Right);
-                else if (inputX < 0) SetDirection(Dir.Left);
-                else if (inputY > 0) SetDirection(Dir.Down);
-                else if (inputY < 0) SetDirection(Dir.Up);
-            }
+
         }
 
         private void Interact()
@@ -358,7 +335,8 @@ namespace Over_Roboted_II
                     {
                         c.isInteracting = true;
                         stopwatch.Stop();
-                    } else
+                    }
+                    else
                     {
                         c.isInteracting = false;
                         stopwatch.Start();
@@ -399,52 +377,6 @@ namespace Over_Roboted_II
             GameScale.ScaleY = scale;
         }
 
-        // Démarre le DispatcherTimer d'animation
-        private void StartFrameTimer()
-        {
-            if (!_frameTimer.IsEnabled)
-            {
-                _frameIndex = 0;
-                var frames = _frames[(int)_currentDir];
-                if (frames != null && frames.Length > 0)
-                    Player.Source = frames[_frameIndex];
-                _frameTimer.Start();
-            }
-        }
 
-        // Stoppe et remet la frame au repos (index 0)
-        private void StopFrameTimer()
-        {
-            if (_frameTimer.IsEnabled)
-                _frameTimer.Stop();
-
-            _frameIndex = 0;
-            var frames = _frames[(int)_currentDir];
-            if (frames != null && frames.Length > 0)
-                Player.Source = frames[0];
-        }
-
-        // Tick du timer : avance la frame
-        private void FrameTimer_Tick(object? sender, EventArgs e)
-        {
-            var frames = _frames[(int)_currentDir];
-            if (frames == null || frames.Length == 0) return;
-
-            _frameIndex = (_frameIndex + 1) % _framesPerDirection;
-            Player.Source = frames[_frameIndex];
-        }
-
-        // Change la direction et réinitialise l'animation (ne démarre pas/stoppe le timer)
-        private void SetDirection(Dir d)
-        {
-            if (_currentDir != d)
-            {
-                _currentDir = d;
-                _frameIndex = 0;
-                var frames = _frames[(int)_currentDir];
-                if (frames != null && frames.Length > 0)
-                    Player.Source = frames[0];
-            }
-        }
     }
 }

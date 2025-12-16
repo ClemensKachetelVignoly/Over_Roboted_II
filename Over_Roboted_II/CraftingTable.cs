@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Reflection.Emit;
@@ -22,7 +23,7 @@ namespace Over_Roboted_II
     {
         private static List<CraftingTable> AllCraftingTables = new List<CraftingTable>();
 
-        public int X { get; set; } 
+        public int X { get; set; }
         public int Y { get; set; }
 
         public Image imgCT;
@@ -39,16 +40,17 @@ namespace Over_Roboted_II
 
         public static Rect oldHitbox = new Rect();
 
-        public CraftingTable(int x, int y)
+        public CraftingTable(int x, int y, string sourceCraftingTable)
         {
             X = x;
             Y = y;
 
-            source = new BitmapImage(new Uri("pack://application:,,,/Images/CraftingTable.jpg"));
+            source = new BitmapImage(new Uri(sourceCraftingTable));
             sourceOK = new BitmapImage(new Uri("pack://application:,,,/Images/CraftingTableOK.jpg"));
             sourceError = new BitmapImage(new Uri("pack://application:,,,/Images/CraftingTableError.jpg"));
 
-            imgCT = new Image {
+            imgCT = new Image
+            {
                 Source = source
             };
 
@@ -64,7 +66,7 @@ namespace Over_Roboted_II
             isDragging = true;
 
             imgCT.CaptureMouse();
-            
+
             dragStartMouse = e.GetPosition(imgCT.Parent as UIElement);
             dragStartBlock = new Point(X, Y);
 
@@ -75,6 +77,7 @@ namespace Over_Roboted_II
             imgCT.Opacity = 0.6;
 
             Canvas.SetZIndex(imgCT, 1);
+
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
@@ -94,7 +97,7 @@ namespace Over_Roboted_II
 
                 bool changeColor = false;
 
-                for (int i = 0;  i < AllCraftingTables.Count; i++)
+                for (int i = 0; i < AllCraftingTables.Count; i++)
                 {
                     if (i == AllCraftingTables.IndexOf(this)) continue;
                     else
@@ -165,6 +168,6 @@ namespace Over_Roboted_II
         }
 
         public Rect Hitbox => new Rect(X, Y, 160, 80);
-        public Rect InteractHitbox => new Rect(X-10, Y-10, 180, 100);
+        public Rect InteractHitbox => new Rect(X - 10, Y - 10, 180, 100);
     }
 }
