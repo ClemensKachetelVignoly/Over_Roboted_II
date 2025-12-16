@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Media;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,8 +29,10 @@ namespace Over_Roboted_II
         {
             InitializeComponent();
             ShowUC("_demarrage"); 
+            
         }
-       
+        
+        
         public void ShowUC(string uc)
         {                    
             if (uc == "_demarrage")
