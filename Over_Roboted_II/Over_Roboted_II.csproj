@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Audio\musiqueJeu.mp3" />
     <None Remove="Audio\sonAppuiBouton.wav" />
     <None Remove="Audio\sonBouton.wav" />
     <None Remove="Audio\sonBouton2.wav" />
@@ -59,6 +60,12 @@
     <None Remove="Images\Robot\tête1.png" />
     <None Remove="Images\Robot\tête2.png" />
     <None Remove="Images\Robot\tête3.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Audio\musiqueJeu.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

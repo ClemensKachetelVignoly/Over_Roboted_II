@@ -18,9 +18,9 @@ namespace Over_Roboted_II
         public MainWindow()
         {
             InitializeComponent();
-            InitMusique();
+            
             ShowUC("_demarrage");
-
+            
         }
 
 
@@ -32,6 +32,7 @@ namespace Over_Roboted_II
             }
             else if (uc == "_game")
             {
+                InitMusique();
                 _game.stopwatch.Start();
                 contentControl.Content = _game;
                 
