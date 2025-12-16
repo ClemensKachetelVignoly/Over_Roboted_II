@@ -13,7 +13,9 @@
             <Canvas.LayoutTransform>
                 <ScaleTransform x:Name="GameScale"/>
             </Canvas.LayoutTransform>
-
+            <Canvas.Background>
+                <ImageBrush ImageSource="pack://application:,,,/Images/backgroudJeu.png"/>
+            </Canvas.Background>
             <Image x:Name="Player" Source="Images/Miku/devant1.png" Width="80" Height="80" Canvas.Left="0" Canvas.Top="0" RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="Fill"/>
         </Canvas>
         <Grid x:Name="Popup" Visibility="Collapsed">

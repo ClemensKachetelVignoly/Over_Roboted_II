@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\backgroudJeu.png" />
     <None Remove="Images\backgroundAccueil.jpg" />
     <None Remove="Images\craftingtable1.jpg" />
     <None Remove="Images\craftingtable2.jpg" />
@@ -43,6 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\backgroudJeu.png" />
     <Resource Include="Images\backgroundAccueil.jpg" />
     <Resource Include="Images\craftingtable1.jpg" />
     <Resource Include="Images\craftingtable2.jpg" />
