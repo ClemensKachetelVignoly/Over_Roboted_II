@@ -42,6 +42,18 @@
     <None Remove="Images\ressource1.jpg" />
     <None Remove="Images\ressource2.jpg" />
     <None Remove="Images\resdource3.jpg" />
+    <None Remove="Images\Robot\bras1.png" />
+    <None Remove="Images\Robot\bras2.png" />
+    <None Remove="Images\Robot\bras3.png" />
+    <None Remove="Images\Robot\corps1.png" />
+    <None Remove="Images\Robot\corps2.png" />
+    <None Remove="Images\Robot\corps3.png" />
+    <None Remove="Images\Robot\jambes1.png" />
+    <None Remove="Images\Robot\jambes2.png" />
+    <None Remove="Images\Robot\jambes3.png" />
+    <None Remove="Images\Robot\tête1.png" />
+    <None Remove="Images\Robot\tête2.png" />
+    <None Remove="Images\Robot\tête3.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -77,6 +89,18 @@
     <Resource Include="Images\ressource1.jpg" />
     <Resource Include="Images\ressource2.jpg" />
     <Resource Include="Images\ressource3.jpg" />
+    <Resource Include="Images\Robot\bras1.png" />
+    <Resource Include="Images\Robot\bras2.png" />
+    <Resource Include="Images\Robot\bras3.png" />
+    <Resource Include="Images\Robot\corps1.png" />
+    <Resource Include="Images\Robot\corps2.png" />
+    <Resource Include="Images\Robot\corps3.png" />
+    <Resource Include="Images\Robot\jambes1.png" />
+    <Resource Include="Images\Robot\jambes2.png" />
+    <Resource Include="Images\Robot\jambes3.png" />
+    <Resource Include="Images\Robot\tête1.png" />
+    <Resource Include="Images\Robot\tête2.png" />
+    <Resource Include="Images\Robot\tête3.png" />
   </ItemGroup>
 
 </Project>
