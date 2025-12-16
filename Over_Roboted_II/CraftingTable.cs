@@ -11,6 +11,7 @@ namespace Over_Roboted_II
 
         public int X { get; set; }
         public int Y { get; set; }
+        public string Component {  get; set; }
 
         public Image imgCT;
         public BitmapImage source;
@@ -26,10 +27,11 @@ namespace Over_Roboted_II
 
         public static Rect oldHitbox = new Rect();
 
-        public CraftingTable(int x, int y, string sourceCraftingTable)
+        public CraftingTable(int x, int y, string sourceCraftingTable, string component)
         {
             X = x;
             Y = y;
+            Component = component;
 
             source = new BitmapImage(new Uri(sourceCraftingTable));
             sourceOK = new BitmapImage(new Uri("pack://application:,,,/Images/CraftingTableOK.jpg"));

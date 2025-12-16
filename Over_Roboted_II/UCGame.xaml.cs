@@ -67,9 +67,10 @@ namespace Over_Roboted_II
 
         private void InitializeCraftingTable()
         {
+            string[] componentList = { "tête", "corps", "bras", "jambes" };
             for (int i = 0; i < 4; i++)
             {
-                CraftingTablesList.Add(new CraftingTable(200 + i * 180, 0, $"pack://application:,,,/Images/craftingtable{i + 1}.jpg"));
+                CraftingTablesList.Add(new CraftingTable(200 + i * 180, 0, $"pack://application:,,,/Images/craftingtable{i + 1}.jpg", componentList[i]));
             }
 
 
@@ -326,6 +327,9 @@ namespace Over_Roboted_II
                     if (stopwatch.IsRunning)
                     {
                         c.isInteracting = true;
+                        img1.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Robot/{c.Component}1.png"));
+                        img2.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Robot/{c.Component}2.png"));
+                        img3.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Robot/{c.Component}3.png"));
                         stopwatch.Stop();
                     }
                     else
@@ -334,6 +338,7 @@ namespace Over_Roboted_II
                         stopwatch.Start();
                     }
                     Popup.Visibility = Popup.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+                    Console.WriteLine(Popup.Visibility);
                     interactCrafting = true;
                 }
             }
