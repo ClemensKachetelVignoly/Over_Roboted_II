@@ -1,15 +1,5 @@
-﻿using System.Diagnostics;
-using System.Media;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
+﻿using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Over_Roboted_II
 {
@@ -22,27 +12,29 @@ namespace Over_Roboted_II
         public UCParameters _parameters = new UCParameters();
         public UCDemarrage _demarrage = new UCDemarrage();
         public UCRegles _regles = new UCRegles();
-        
-        public static MainWindow mainWindow = ((MainWindow)(Application.Current.MainWindow));
 
+        public static MainWindow mainWindow = ((MainWindow)(Application.Current.MainWindow));
+        private static MediaPlayer musiqueJeu;
         public MainWindow()
         {
             InitializeComponent();
-            ShowUC("_demarrage"); 
-            
+            InitMusique();
+            ShowUC("_demarrage");
+
         }
-        
-        
+
+
         public void ShowUC(string uc)
-        {                    
+        {
             if (uc == "_demarrage")
             {
                 contentControl.Content = _demarrage;
             }
             else if (uc == "_game")
-            { 
+            {
                 _game.stopwatch.Start();
                 contentControl.Content = _game;
+                musiqueJeu.Play();
             }
 
             else if (uc == "_parameters")
@@ -53,6 +45,21 @@ namespace Over_Roboted_II
             {
                 contentControl.Content = _regles;
             }
+        }
+        private void InitMusique()
+        {
+            musiqueJeu = new MediaPlayer();
+           
+            musiqueJeu.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "Audio/musiqueJeu.mp3"));
+            
+            musiqueJeu.MediaEnded += RelanceMusique;
+            musiqueJeu.Volume = 0.5;
+            musiqueJeu.Play();
+        }
+        private void RelanceMusique(object? sender, EventArgs e)
+        {
+            musiqueJeu.Position = TimeSpan.Zero;
+            musiqueJeu.Play();
         }
     }
 }

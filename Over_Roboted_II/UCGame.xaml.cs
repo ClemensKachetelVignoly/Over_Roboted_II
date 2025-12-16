@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Security.Policy;
-using System.Text;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace Over_Roboted_II
 {
@@ -51,6 +40,7 @@ namespace Over_Roboted_II
         BitmapImage[] imageGauche = new BitmapImage[5];
         BitmapImage[] imageDroite = new BitmapImage[5];
 
+        
         public UCGame()
         {
             InitializeComponent();
@@ -59,13 +49,13 @@ namespace Over_Roboted_II
 
             SizeChanged += OnWindowSizeChanged;
             InitializeImagesMiku();
-
-
+            
+            
 
             stopwatch.Start();
             CompositionTarget.Rendering += GameLoop;
         }
-
+       
         private void UpdateResourceVisual()
         {
             ResourcesPanel.Children.Clear();

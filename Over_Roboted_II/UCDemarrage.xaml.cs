@@ -1,29 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Media;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Over_Roboted_II
 {
     /// <summary>
     /// Logique d'interaction pour UCDemarrage.xaml
     /// </summary>
-    
+
 
     public partial class UCDemarrage : UserControl
     {
         public static SoundPlayer sonClick;
+        public static SoundPlayer sonLancementJeu;
+        
         public UCDemarrage()
         {
             InitializeComponent();
@@ -31,7 +22,8 @@ namespace Over_Roboted_II
         }
         public void InitSon()
         {
-            sonClick = new SoundPlayer(Application.GetResourceStream(new Uri("pack://application:,,,/Audio/sonBoutonJeu.wav")).Stream);
+            sonClick = new SoundPlayer(Application.GetResourceStream(new Uri("pack://application:,,,/Audio/sonBoutonAppui.wav")).Stream);
+            sonLancementJeu = new SoundPlayer(Application.GetResourceStream(new Uri("pack://application:,,,/Audio/sonLancementJeu.wav")).Stream);
         }
         private void butDemarrer_Click(object sender, RoutedEventArgs e)
         {
@@ -39,7 +31,7 @@ namespace Over_Roboted_II
             ///  L'utilisateur ferme la fenêtre des paramètres avec mise à jour
             /// </summary>
 
-            sonClick.Play();
+            sonLancementJeu.Play();
             MainWindow.mainWindow.ShowUC("_game");
         }
 
