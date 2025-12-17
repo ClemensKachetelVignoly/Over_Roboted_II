@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -17,7 +18,7 @@ namespace Over_Roboted_II
         List<Resource> ResourcesList = new List<Resource>();
         Commande cmd;
 
-        Dictionary<string, int> Inventory = new Dictionary<string, int>();
+        List<Dictionary<string, int>> Inventory = new List<Dictionary<string, int>>();
 
         private RoutedEventHandler butImg1Handler, butImg2Handler, butImg3Handler;
 
@@ -492,15 +493,43 @@ namespace Over_Roboted_II
         }
         private void CheckValues(int copper, int gold, int diamond, string component, int nb)
         {
-            if (copper <= ResourcesList[0].Amount && gold <= ResourcesList[1].Amount && diamond <= ResourcesList[2].Amount)
+            if (1==1 || copper <= ResourcesList[0].Amount && gold <= ResourcesList[1].Amount && diamond <= ResourcesList[2].Amount)
             {
                 ResourcesList[0].Amount -= copper;
                 ResourcesList[1].Amount -= gold;
                 ResourcesList[2].Amount -= diamond;
                 UpdateResourceVisual();
-                Inventory.Add(component, nb);
-                cmd = new Commande(GameCanvas);
+                Dictionary<string, int> comp = new Dictionary<string, int>();
+                comp.Add(component, nb);
+                Inventory.Add(comp);
+                CheckCommandCompletion();
+                
             }
+        }
+        private void CheckCommandCompletion()
+        {
+            bool completed = true;
+
+            //foreach (var item in cmd.commandComponents)
+            //{
+            //    Console.WriteLine($"{item.Key}, {item.Value}");
+            //}
+
+            Console.Clear();
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+            foreach (var item in cmd.commandComponents) 
+            {
+                dic.Add(item.Key, item.Value);
+                for (int i = 0; i < Inventory.Count; i++)
+                {
+                    if (, Inventory[i].Values) == (item.Key, item.Value)) Console.WriteLine("True");
+                    else Console.WriteLine("False");
+                }
+            }
+            dic.Clear();
+
+            //cmd = new Commande(GameCanvas);
+            //Inventory.Clear();
         }
     }
 }
