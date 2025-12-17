@@ -10,6 +10,8 @@ namespace Over_Roboted_II
         public string Name { get; }
         public int Amount { get; set; }
 
+        public bool isWaiting = false;
+
         public Resource(string name, int amount)
         {
             Name = name;
@@ -18,12 +20,14 @@ namespace Over_Roboted_II
 
         public async Task Add(int nb)
         {
-            await Task.Delay(100);
+            isWaiting = true;
+            
             Amount += nb;
             
+            await Task.Delay(1000);
+            isWaiting = false;
         }
-
-        //public void 
+ 
 
         public TextBlock Draw()
         {

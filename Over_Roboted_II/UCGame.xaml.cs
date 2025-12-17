@@ -15,6 +15,9 @@ namespace Over_Roboted_II
         List<CraftingTable> CraftingTablesList = new List<CraftingTable>();
         List<ResourceGenerator> ResourceGeneratorsList = new List<ResourceGenerator>();
         List<Resource> ResourcesList = new List<Resource>();
+        Commande cmd;
+
+        Dictionary<string, int> Inventory = new Dictionary<string, int>();
 
         private RoutedEventHandler butImg1Handler, butImg2Handler, butImg3Handler;
 
@@ -42,7 +45,7 @@ namespace Over_Roboted_II
         BitmapImage[] imageGauche = new BitmapImage[5];
         BitmapImage[] imageDroite = new BitmapImage[5];
 
-        
+
         public UCGame()
         {
             InitializeComponent();
@@ -53,9 +56,9 @@ namespace Over_Roboted_II
             SizeChanged += OnWindowSizeChanged;
             InitializeImagesMiku();
 
-            Commande cmd = new Commande(GameCanvas);
+            cmd = new Commande(GameCanvas);
 
-            stopwatch.Start();
+        stopwatch.Start();
             CompositionTarget.Rendering += GameLoop;
         }
 
@@ -75,7 +78,7 @@ namespace Over_Roboted_II
             };
         }
 
-        private void UpdateResourceVisual()
+        public void UpdateResourceVisual()
         {
             ResourcesPanel.Children.Clear();
             foreach (var r in ResourcesList)
@@ -99,6 +102,7 @@ namespace Over_Roboted_II
             }
 
         }
+
         private void InitializeResourceGeneratorsList()
         {
             ResourcesList.Add(new Resource("copper", 0));
@@ -343,13 +347,11 @@ namespace Over_Roboted_II
             if (e.Key == Key.E)
             {
                 Interact();
-
-
             }
 
         }
 
-        private void Interact()
+        private async void Interact()
         {
             bool interactCrafting = false;
 
@@ -403,9 +405,12 @@ namespace Over_Roboted_II
                 {
                     if (r.canInteract)
                     {
+                        if (!r.Res.isWaiting)
+                        {
+                            await r.Res.Add(1);
+                            UpdateResourceVisual();
+                        }
                         
-                        r.Res.Add(1);
-                        UpdateResourceVisual();
                     }
                 }
             }
@@ -432,15 +437,70 @@ namespace Over_Roboted_II
 
         private void butImg1_Click(object sender, RoutedEventArgs e, string component)
         {
-            Console.WriteLine($"{component} 1");
+            switch (component)
+            {
+                case "tête":
+                    CheckValues(8, 4, 2, component, 1);
+                    break;
+                case "corps":
+                    CheckValues(15, 2, 5, component, 1);
+                    break;
+                case "bras":
+                    CheckValues(4, 4, 4, component, 1);
+                    break;
+                case "jambes":
+                    CheckValues(4, 4, 4, component, 1);
+                    break;
+            }
         }
+
         private void butImg2_Click(object sender, RoutedEventArgs e, string component)
         {
-            Console.WriteLine($"{component} 2");
+            switch (component)
+            {
+                case "tête":
+                    CheckValues(4, 8, 2, component, 2);
+                    break;
+                case "corps":
+                    CheckValues(2, 15, 5, component, 2);
+                    break;
+                case "bras":
+                    CheckValues(4, 4, 4, component, 2);
+                    break;
+                case "jambes":
+                    CheckValues(4, 4, 4, component, 2);
+                    break;
+            }
         }
         private void butImg3_Click(object sender, RoutedEventArgs e, string component)
         {
-            Console.WriteLine($"{component} 3");
+            switch (component)
+            {
+                case "tête":
+                    CheckValues(2, 4, 8, component, 3);
+                    break;
+                case "corps":
+                    CheckValues(2, 5, 15, component, 3);
+                    break;
+                case "bras":
+                    CheckValues(4, 4, 4, component, 3);
+                    break;
+                case "jambes":
+                    CheckValues(4, 4, 4, component, 3);
+                    break;
+            }
+        }
+        private void CheckValues(int copper, int gold, int diamond, string component, int nb)
+        {
+            if (copper <= ResourcesList[0].Amount && gold <= ResourcesList[1].Amount && diamond <= ResourcesList[2].Amount)
+            {
+                ResourcesList[0].Amount -= copper;
+                ResourcesList[1].Amount -= gold;
+                ResourcesList[2].Amount -= diamond;
+                UpdateResourceVisual();
+                Inventory.Add(component, nb);
+                cmd = new Commande(GameCanvas);
+            }
         }
     }
 }

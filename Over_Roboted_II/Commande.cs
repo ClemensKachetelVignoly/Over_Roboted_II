@@ -15,6 +15,9 @@ namespace Over_Roboted_II
         public int nbJambe;
         public int nbCorps;
         public int nbBras;
+
+        public Dictionary<string, int> commandComponents = new Dictionary<string, int>();
+
         public Canvas Cnv { get; set; }
 
         public Commande(Canvas canvas)
@@ -23,15 +26,17 @@ namespace Over_Roboted_II
 
             Random rnd = new Random();
 
-            Image imgTete = new Image(), imgJambe = new Image(), imgCorps = new Image(), imgBras = new Image(), imgBras2 = new Image();
-
+            Image imgTete = new Image(), imgJambe = new Image(), imgCorps = new Image(), imgBras = new Image();
+            Image imgBras2 = new Image();
             List<Image> imgList = new List<Image>();
             imgList.AddRange(new List<Image>
             {
-                imgTete, imgJambe, imgCorps, imgBras, imgBras2
+                imgTete, imgJambe, imgCorps, imgBras
             });
 
-            string[] img = { "tête", "jambes", "corps", "bras", "bras2" };
+            
+
+            string[] img = { "tête", "jambes", "corps", "bras" };
 
             for (int i = 0; i < img.Length; i++)
             {
@@ -43,6 +48,8 @@ namespace Over_Roboted_II
                     imgList[i].Height = 50;
 
                     canvas.Children.Add(imgList[i]);
+
+                    commandComponents.Add(img[i], nb);
 
                     switch (img[i])
                     {
@@ -71,11 +78,13 @@ namespace Over_Roboted_II
                     {
                         case "bras":
                             Canvas.SetLeft(imgList[i], 27);
-                            break;
-
-                        case "bras2":
-                            Canvas.SetLeft(imgList[i], 73);
-                            imgList[i].FlowDirection = FlowDirection.RightToLeft;
+                            imgBras2.Source = imgBras.Source;
+                            imgBras2.Width = 50;
+                            imgBras2.Height = 50;
+                            imgBras2.FlowDirection = FlowDirection.RightToLeft;
+                            canvas.Children.Add(imgBras2);
+                            Canvas.SetTop(imgBras2, 550);
+                            Canvas.SetLeft(imgBras2, 73);
                             break;
 
                         default:
