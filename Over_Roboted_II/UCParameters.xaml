@@ -8,9 +8,11 @@
              d:DesignHeight="720" d:DesignWidth="1080">
     <Grid>
         <Label Content="Paramètres" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Top" FontSize="36"/>
-        <Button x:Name="butExit" Content="Quitter" HorizontalAlignment="Center" Margin="0,0,0,100" VerticalAlignment="Bottom" Height="44" Width="400" Click="butExit_Click"/>
-        <Button x:Name="butApply" Content="Appliquer et lancer le jeu" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="44" Width="400" Margin="0,0,0,170" Click="butApply_Click"/>
+        <Button x:Name="butExit" Content="Annuler et retourner au jeu" HorizontalAlignment="Center" Margin="0,0,0,100" VerticalAlignment="Bottom" Height="44" Width="400" Click="butExit_Click"/>
+        <Button x:Name="butApply" Content="Appliquer et retourner au jeu" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="44" Width="400" Margin="0,0,0,170" Click="butApply_Click"/>
         <CheckBox x:Name="checkFullscreen" Content="Fullscreen" HorizontalAlignment="Center" Margin="0,290,0,0" VerticalAlignment="Top" FontSize="22" Click="CheckFullscreen_Click" IsChecked="False"/>
         <Button x:Name="butRetour" Content="Retour au menu" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="44" Width="400" Margin="0,0,0,30"  Click="butRetour_Click"/>
+        <Slider x:Name="sliderSon" Minimum="0" Maximum="1" Value="0.5" Margin="418,419,418,262" ValueChanged="sliderSon_ValueChanged"/>
+        <TextBlock TextWrapping="Wrap" Text="Volume de la musique :" Margin="426,385,482,306"/>
     </Grid>
 </UserControl>

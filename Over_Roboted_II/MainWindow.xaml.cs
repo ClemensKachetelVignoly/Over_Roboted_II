@@ -8,17 +8,19 @@ namespace Over_Roboted_II
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow mainWindow = ((MainWindow)(Application.Current.MainWindow));
         public UCGame _game = new UCGame();
         public UCParameters _parameters = new UCParameters();
         public UCDemarrage _demarrage = new UCDemarrage();
         public UCRegles _regles = new UCRegles();
 
-        public static MainWindow mainWindow = ((MainWindow)(Application.Current.MainWindow));
-        private static MediaPlayer musiqueJeu;
+        
+        public static MediaPlayer musiqueJeu;
         public MainWindow()
         {
             InitializeComponent();
-            
+            mainWindow = this;
+            InitMusique();
             ShowUC("_demarrage");
             
         }
@@ -32,7 +34,7 @@ namespace Over_Roboted_II
             }
             else if (uc == "_game")
             {
-                InitMusique();
+                
                 _game.stopwatch.Start();
                 contentControl.Content = _game;
                 

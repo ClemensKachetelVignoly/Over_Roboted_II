@@ -10,7 +10,8 @@ namespace Over_Roboted_II
     {
         private Dictionary<string, string> parametersDict = new Dictionary<string, string>()
         {
-            { "fullscreen", "false" }
+            { "fullscreen", "false" },
+            { "volume", "0.5" }
         };
         private Dictionary<string, string> tempDict = new Dictionary<string, string>();
 
@@ -40,10 +41,14 @@ namespace Over_Roboted_II
             ///  L'utilisateur ferme la fenêtre des paramètres avec mise à jour
             /// </summary>
             UCDemarrage.sonClick.Play();
+            tempDict["volume"] = sliderSon.Value.ToString();
             UpdateValues(tempDict, parametersDict);
             UpdateSettings(parametersDict, 1);
             MainWindow.mainWindow.ShowUC("_game");
         }
+        
+
+        
 
         private void CheckFullscreen_Click(object sender, RoutedEventArgs e)
         {
@@ -58,6 +63,7 @@ namespace Over_Roboted_II
             /// </summary>
 
             checkFullscreen.IsChecked = Convert.ToBoolean(parameters["fullscreen"]);
+            sliderSon.Value = Convert.ToDouble(parameters["volume"]);
 
             if (value == 1)
             {
@@ -68,6 +74,10 @@ namespace Over_Roboted_II
                 else
                 {
                     Application.Current.MainWindow.WindowState = WindowState.Normal;
+                }
+                if (MainWindow.musiqueJeu != null)
+                {
+                    MainWindow.musiqueJeu.Volume = sliderSon.Value;
                 }
             }
         }
@@ -85,8 +95,19 @@ namespace Over_Roboted_II
 
         private void butRetour_Click(object sender, RoutedEventArgs e)
         {
+            
             UCDemarrage.sonClick.Play();
             MainWindow.mainWindow.ShowUC("_demarrage");
         }
+
+        private void sliderSon_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            
+            if (MainWindow.musiqueJeu != null)
+            {
+                MainWindow.musiqueJeu.Volume = sliderSon.Value;
+            }
+        
+    }
     }
 }
