@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -15,9 +16,11 @@ namespace Over_Roboted_II
             Amount = amount;
         }
 
-        public void Add(int nb)
+        public async Task Add(int nb)
         {
+            await Task.Delay(100);
             Amount += nb;
+            
         }
 
         //public void 

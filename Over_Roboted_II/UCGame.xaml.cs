@@ -138,7 +138,7 @@ namespace Over_Roboted_II
                 Player.Source = tabImg[nombre / 5];
         }
 
-        private void GameLoop(object sender, EventArgs e)
+        private void  GameLoop(object sender, EventArgs e)
         {
             double current = stopwatch.Elapsed.TotalSeconds;
             double deltaTime = current - lastFrameTime;
@@ -295,7 +295,7 @@ namespace Over_Roboted_II
             Application.Current.MainWindow.KeyUp += GameKeyUp;
         }
 
-        private void GameKeyDown(object sender, KeyEventArgs e)
+        private  void GameKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
             {
@@ -325,8 +325,12 @@ namespace Over_Roboted_II
             }
             if (e.Key == Key.Space)
                 MainWindow.mainWindow.Close();
-            if (e.Key == Key.E)
-                Interact();
+            //if (e.Key == Key.E)
+            //{ 
+            //    Interact();
+                
+
+            //}
         }
 
         private void GameKeyUp(object sender, KeyEventArgs e)
@@ -336,7 +340,12 @@ namespace Over_Roboted_II
 
             if ((e.Key == Key.Z) && inputY == -1) inputY = 0;
             if ((e.Key == Key.S) && inputY == 1) inputY = 0;
+            if (e.Key == Key.E)
+            {
+                Interact();
 
+
+            }
 
         }
 
@@ -394,6 +403,7 @@ namespace Over_Roboted_II
                 {
                     if (r.canInteract)
                     {
+                        
                         r.Res.Add(1);
                         UpdateResourceVisual();
                     }
