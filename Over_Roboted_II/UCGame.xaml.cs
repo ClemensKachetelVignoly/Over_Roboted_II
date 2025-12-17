@@ -281,7 +281,12 @@ namespace Over_Roboted_II
                 r.Interact(playerHitbox);
             }
 
-            
+            // verification que le joueur est bien dans les limites du canvas
+            posX = Math.Clamp(posX, 0, GameCanvas.Width - Player.Width);
+            posY = Math.Clamp(posY, 0, GameCanvas.Height - Player.Height);
+            Canvas.SetLeft(Player, posX); 
+            Canvas.SetTop(Player, posY);
+
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
