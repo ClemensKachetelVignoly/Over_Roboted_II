@@ -34,8 +34,6 @@ namespace Over_Roboted_II
                 imgTete, imgJambe, imgCorps, imgBras
             });
 
-            
-
             string[] img = { "tête", "jambes", "corps", "bras" };
 
             for (int i = 0; i < img.Length; i++)
@@ -55,22 +53,18 @@ namespace Over_Roboted_II
                     {
                         case "tête":
                             Canvas.SetTop(imgList[i], 500);
-                            
                             break;
 
                         case "corps":
                             Canvas.SetTop(imgList[i], 540);
-                            
                             break;
 
                         case "jambes":
                             Canvas.SetTop(imgList[i], 577);
-                            
                             break;
 
                         default:
                             Canvas.SetTop(imgList[i], 550);
-                            
                             break;
                     }
 

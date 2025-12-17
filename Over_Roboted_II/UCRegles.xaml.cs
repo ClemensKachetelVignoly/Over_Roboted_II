@@ -13,10 +13,6 @@ namespace Over_Roboted_II
             InitializeComponent();
         }
 
-
-
-
-
         private void butQuitter_Click(object sender, RoutedEventArgs e)
         {
             UCDemarrage.sonClick.Play();

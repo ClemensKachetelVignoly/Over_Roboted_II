@@ -65,7 +65,6 @@ namespace Over_Roboted_II
             imgCT.Opacity = 0.6;
 
             Canvas.SetZIndex(imgCT, 1);
-
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
@@ -132,9 +131,9 @@ namespace Over_Roboted_II
                     {
                         c.imgCT.Opacity = 1;
                     }
-                    imgCT.Opacity = 0.7;
-                    canInteract = true;
                 }
+                imgCT.Opacity = 0.7;
+                canInteract = true;
             }
             else
             {

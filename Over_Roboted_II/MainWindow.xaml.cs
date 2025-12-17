@@ -14,7 +14,6 @@ namespace Over_Roboted_II
         public UCDemarrage _demarrage = new UCDemarrage();
         public UCRegles _regles = new UCRegles();
 
-        
         public static MediaPlayer musiqueJeu;
         public MainWindow()
         {
@@ -22,9 +21,7 @@ namespace Over_Roboted_II
             mainWindow = this;
             InitMusique();
             ShowUC("_demarrage");
-            
         }
-
 
         public void ShowUC(string uc)
         {
@@ -34,21 +31,17 @@ namespace Over_Roboted_II
             }
             else if (uc == "_game")
             {
-                
                 _game.stopwatch.Start();
                 contentControl.Content = _game;
-                
-            }
-
-            else if (uc == "_parameters")
+            } else if (uc == "_parameters")
             {
                 contentControl.Content = _parameters;
-            }
-            else if (uc == "_regles")
+            } else if (uc == "_regles")
             {
                 contentControl.Content = _regles;
             }
         }
+
         private void InitMusique()
         {
             musiqueJeu = new MediaPlayer();

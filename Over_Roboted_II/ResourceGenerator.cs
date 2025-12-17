@@ -46,7 +46,7 @@ namespace Over_Roboted_II
 
             AllRessourceGenerators.Add(this);
         }
-        public   void Interact(Rect playerHitbox)
+        public void Interact(Rect playerHitbox)
         {
             if (playerHitbox.IntersectsWith(this.InteractHitbox))
             {

@@ -8,8 +8,7 @@ namespace Over_Roboted_II
     /// <summary>
     /// Logique d'interaction pour UCDemarrage.xaml
     /// </summary>
-
-
+    
     public partial class UCDemarrage : UserControl
     {
         public static SoundPlayer sonClick;
@@ -20,11 +19,13 @@ namespace Over_Roboted_II
             InitializeComponent();
             InitSon();
         }
+
         public void InitSon()
         {
             sonClick = new SoundPlayer(Application.GetResourceStream(new Uri("pack://application:,,,/Audio/sonBoutonAppui.wav")).Stream);
             sonLancementJeu = new SoundPlayer(Application.GetResourceStream(new Uri("pack://application:,,,/Audio/sonLancementJeu.wav")).Stream);
         }
+
         private void butDemarrer_Click(object sender, RoutedEventArgs e)
         {
             /// <summary>
@@ -51,7 +52,6 @@ namespace Over_Roboted_II
         {
             sonClick.Play();
             Application.Current.Shutdown();
-
         }
     }
 }

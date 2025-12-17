@@ -96,7 +96,6 @@ namespace Over_Roboted_II
                 CraftingTablesList.Add(new CraftingTable(200 + i * 180, 0, $"pack://application:,,,/Images/craftingtable{i + 1}.jpg", componentList[i]));
             }
 
-
             foreach (var c in CraftingTablesList)
             {
                 c.Draw(GameCanvas);
@@ -291,7 +290,6 @@ namespace Over_Roboted_II
             posY = Math.Clamp(posY, 0, GameCanvas.Height - Player.Height);
             Canvas.SetLeft(Player, posX); 
             Canvas.SetTop(Player, posY);
-
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -310,32 +308,19 @@ namespace Over_Roboted_II
             if (e.Key == Key.Q)
             {
                 inputX = -1;
-
             }
             if (e.Key == Key.D)
             {
                 inputX = 1;
-
             }
             if (e.Key == Key.Z)
             {
                 inputY = -1;
-
             }
             if (e.Key == Key.S)
             {
                 inputY = 1;
-
-
             }
-            if (e.Key == Key.Space)
-                MainWindow.mainWindow.Close();
-            //if (e.Key == Key.E)
-            //{ 
-            //    Interact();
-                
-
-            //}
         }
 
         private void GameKeyUp(object sender, KeyEventArgs e)
@@ -493,7 +478,7 @@ namespace Over_Roboted_II
         }
         private void CheckValues(int copper, int gold, int diamond, string component, int nb)
         {
-            if (1==1 || copper <= ResourcesList[0].Amount && gold <= ResourcesList[1].Amount && diamond <= ResourcesList[2].Amount)
+            if (copper <= ResourcesList[0].Amount && gold <= ResourcesList[1].Amount && diamond <= ResourcesList[2].Amount)
             {
                 ResourcesList[0].Amount -= copper;
                 ResourcesList[1].Amount -= gold;
@@ -525,7 +510,11 @@ namespace Over_Roboted_II
 
             if (completed)
             {
-
+                foreach (var item in cmd.commandComponents)
+                {
+                    var dic = Inventory.First(dict => dict.TryGetValue(item.Key, out int value) && value == item.Value);
+                    Inventory.Remove(dic);
+                }
                 cmd = new Commande(GameCanvas);
             }
         }

@@ -28,7 +28,6 @@ namespace Over_Roboted_II
             /// Les paramètres retournent à leur état d'origine
             /// </summary>
 
-
             UCDemarrage.sonClick.Play();
             UpdateValues(parametersDict, tempDict);
             UpdateSettings(parametersDict, 0);
@@ -47,9 +46,6 @@ namespace Over_Roboted_II
             MainWindow.mainWindow.ShowUC("_game");
         }
         
-
-        
-
         private void CheckFullscreen_Click(object sender, RoutedEventArgs e)
         {
             UCDemarrage.sonClick.Play();
@@ -107,7 +103,6 @@ namespace Over_Roboted_II
             {
                 MainWindow.musiqueJeu.Volume = sliderSon.Value;
             }
-        
-    }
+        }
     }
 }
