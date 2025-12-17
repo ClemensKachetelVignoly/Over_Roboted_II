@@ -16,6 +16,8 @@ namespace Over_Roboted_II
         List<ResourceGenerator> ResourceGeneratorsList = new List<ResourceGenerator>();
         List<Resource> ResourcesList = new List<Resource>();
 
+        private RoutedEventHandler butImg1Handler, butImg2Handler, butImg3Handler;
+
         public Stopwatch stopwatch = new Stopwatch();
 
         private static double lastFrameTime;
@@ -45,6 +47,7 @@ namespace Over_Roboted_II
         {
             InitializeComponent();
             InitializeCraftingTable();
+            InitializeHandlers();
             InitializeResourceGeneratorsList();
 
             SizeChanged += OnWindowSizeChanged;
@@ -55,7 +58,23 @@ namespace Over_Roboted_II
             stopwatch.Start();
             CompositionTarget.Rendering += GameLoop;
         }
-       
+
+        private void InitializeHandlers()
+        {
+            butImg1Handler = (sender, e) =>
+            {
+                butImg1_Click(sender, e, "");
+            };
+            butImg2Handler = (sender, e) =>
+            {
+                butImg2_Click(sender, e, "");
+            };
+            butImg3Handler = (sender, e) =>
+            {
+                butImg3_Click(sender, e, "");
+            };
+        }
+
         private void UpdateResourceVisual()
         {
             ResourcesPanel.Children.Clear();
@@ -324,6 +343,27 @@ namespace Over_Roboted_II
             {
                 if (c.canInteract)
                 {
+                    butImg1.Click -= butImg1Handler;
+                    butImg2.Click -= butImg2Handler;
+                    butImg3.Click -= butImg3Handler;
+
+                    butImg1Handler = (sender, e) =>
+                    {
+                        butImg1_Click(sender, e, c.Component);
+                    };
+                    butImg2Handler = (sender, e) =>
+                    {
+                        butImg2_Click(sender, e, c.Component);
+                    };
+                    butImg3Handler = (sender, e) =>
+                    {
+                        butImg3_Click(sender, e, c.Component);
+                    };
+
+                    butImg1.Click += butImg1Handler;
+                    butImg2.Click += butImg2Handler;
+                    butImg3.Click += butImg3Handler;
+
                     if (stopwatch.IsRunning)
                     {
                         c.isInteracting = true;
@@ -375,9 +415,17 @@ namespace Over_Roboted_II
             GameScale.ScaleY = scale;
         }
 
-        private void butImg1_Click(object sender, RoutedEventArgs e)
+        private void butImg1_Click(object sender, RoutedEventArgs e, string component)
         {
-            
+            Console.WriteLine($"{component} 1");
+        }
+        private void butImg2_Click(object sender, RoutedEventArgs e, string component)
+        {
+            Console.WriteLine($"{component} 2");
+        }
+        private void butImg3_Click(object sender, RoutedEventArgs e, string component)
+        {
+            Console.WriteLine($"{component} 3");
         }
     }
 }
