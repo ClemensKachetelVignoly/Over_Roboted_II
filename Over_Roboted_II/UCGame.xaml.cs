@@ -510,26 +510,26 @@ namespace Over_Roboted_II
         {
             bool completed = true;
 
-            //foreach (var item in cmd.commandComponents)
-            //{
-            //    Console.WriteLine($"{item.Key}, {item.Value}");
-            //}
-
             Console.Clear();
-            Dictionary<string, int> dic = new Dictionary<string, int>();
+
             foreach (var item in cmd.commandComponents) 
             {
-                dic.Add(item.Key, item.Value);
-                for (int i = 0; i < Inventory.Count; i++)
+                bool found = Inventory.Any(dict => dict.TryGetValue(item.Key, out int value) && value == item.Value);
+
+                if (!found)
                 {
-                    if (, Inventory[i].Values) == (item.Key, item.Value)) Console.WriteLine("True");
-                    else Console.WriteLine("False");
+                    completed = false;
+                    break;
                 }
             }
-            dic.Clear();
 
-            //cmd = new Commande(GameCanvas);
-            //Inventory.Clear();
+            if (completed)
+            {
+
+                cmd = new Commande(GameCanvas);
+            }
         }
+        
     }
+    
 }
