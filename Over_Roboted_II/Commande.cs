@@ -47,19 +47,23 @@ namespace Over_Roboted_II
                     switch (img[i])
                     {
                         case "tête":
-                            Canvas.SetTop(imgList[i], 0);
+                            Canvas.SetTop(imgList[i], 500);
+                            
                             break;
 
                         case "corps":
-                            Canvas.SetTop(imgList[i], 40);
+                            Canvas.SetTop(imgList[i], 540);
+                            
                             break;
 
                         case "jambes":
-                            Canvas.SetTop(imgList[i], 77);
+                            Canvas.SetTop(imgList[i], 577);
+                            
                             break;
 
                         default:
-                            Canvas.SetTop(imgList[i], 50);
+                            Canvas.SetTop(imgList[i], 550);
+                            
                             break;
                     }
 
